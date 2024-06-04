@@ -12,6 +12,6 @@ public class SignInController {
     public String checkSignIn(@RequestParam(value = "userName", required = false) String userName,
                               @RequestParam(value = "passWord", required = false) String passWord){
         System.out.println("UserName: " + userName + "\n" + "Password: " + passWord);
-        return "Signin/Signin";
+        return "Navbar/Navbar";
     }
 }

@@ -14,7 +14,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgb(5, 12, 49);
+    background: linear-gradient(to right, rgb(58, 121, 76), rgb(168, 159, 142));
 }
 .wrapper{
     width: 420px;
