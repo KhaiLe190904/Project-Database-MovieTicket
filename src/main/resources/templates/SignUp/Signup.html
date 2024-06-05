@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/Signup.css}" />
+    <link rel="stylesheet" href="Signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+<div class="signin">
+    <div class="wrapper">
+        <form action="#" th:action="@{/signup}" method="GET">
+            <h1>Sign up</h1>
+            <div class="inputbox">
+                <input type="text" name="email" placeholder="Email" required>
+                <i class="fa-solid fa-envelope icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="userName" placeholder="Username" required>
+                <i class="fas fa-user icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="password" name="passWord" placeholder="Password" required>
+                <i class="fas fa-lock icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="name" placeholder="Full name" required>
+                <i class="fa-solid fa-address-card icon"></i>            </div>
+            <div class="inputbox">
+                <input type="text" name="phoneNumber" placeholder="Phone Number" required>
+                <i class="fa-solid fa-phone icon"></i>
+            </div>
+            <button type="submit">Sign Up</button>
+            <div class="register">
+                <p>Have an account? <a href="#">Sign In</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
