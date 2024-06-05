@@ -11,14 +11,14 @@
 <body>
 <div class="signin">
     <div class="wrapper">
-        <form action="">
+        <form action="#" th:action="@{/signin}" method="GET">
             <h1>Sign In</h1>
             <div class="inputbox">
-                <input type="text" placeholder="Username" required>
+                <input type="text" name="userName" placeholder="Username" required>
                 <i class="fas fa-user icon"></i>
             </div>
             <div class="inputbox">
-                <input type="password" placeholder="Password" required>
+                <input type="password" name="passWord" placeholder="Password" required>
                 <i class="fas fa-lock icon"></i>
             </div>
             <button type="submit">Sign In</button>
