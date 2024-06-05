@@ -22,4 +22,9 @@ public class SignInController {
     public String checkSignup(){
         return "Signup/Signup";
     }
+
+    @GetMapping("/booking")
+    public String checkBooking(){
+        return "Booking/Booking";
+    }
 }
