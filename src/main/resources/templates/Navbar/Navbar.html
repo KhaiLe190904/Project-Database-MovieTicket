@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../static/css/Navbar.css" th:ref="@{/css/Navbar.css}">
+    <link rel="stylesheet" href="../../static/css/Navbar.css" th:href="@{/css/Navbar.css}">
    
 </head>
 <body>
     <header>
         <nav>
-            <a href="../Navbar/Navbar.html">Home</a>
+            <a href="../Navbar/Navbar.html" th:href="@{/}" >Home</a>
             <a href="">Contacts</a>
             <a href="">Info</a>
-            <a href="../Signin/Signin.html">Sign In</a>
+            <a href="../Signin/Signin.html" th:href="@{/signin}">Sign In</a>
         </nav>
     </header>
 
