@@ -10,21 +10,21 @@
 </head>
 
 <body>
-<div class="signin">
+<div class="signup">
     <div class="wrapper">
-        <form action="#" th:action="@{/signup}" method="GET">
+        <form action="../../Signin/Signin.html" th:action="@{/signin}" method="GET">
             <h1>Sign up</h1>
             <div class="inputbox">
-                <input type="text" name="email" placeholder="Email" required>
-                <i class="fa-solid fa-envelope icon"></i>
-            </div>
-            <div class="inputbox">
-                <input type="text" name="userName" placeholder="Username" required>
+                <input type="text" name="signUpUserName" placeholder="Username" required>
                 <i class="fas fa-user icon"></i>
             </div>
             <div class="inputbox">
-                <input type="password" name="passWord" placeholder="Password" required>
+                <input type="password" name="signUppassWord" placeholder="Password" required>
                 <i class="fas fa-lock icon"></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="email" placeholder="Email" required>
+                <i class="fa-solid fa-envelope icon"></i>
             </div>
             <div class="inputbox">
                 <input type="text" name="name" placeholder="Full name" required>
