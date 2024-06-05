@@ -11,7 +11,7 @@
 <body>
 <div class="signin">
     <div class="wrapper">
-        <form action="#" th:action="@{/signin}" method="GET">
+        <form action="../Navbar/Navbar.html" th:action="@{/}" method="GET">
             <h1>Sign In</h1>
             <div class="inputbox">
                 <input type="text" name="userName" placeholder="Username" required>
@@ -23,7 +23,7 @@
             </div>
             <button type="submit">Sign In</button>
             <div class="register">
-                <p>Don't have an account? <a href="#">Sign Up</a></p>
+                <p>Don't have an account? <a href="../SignUp/Signup.html" th:href="@{/signup}">Sign Up</a></p>
             </div>
         </form>
     </div>
