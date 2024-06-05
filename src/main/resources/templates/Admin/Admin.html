@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Films</title>
+    <link rel="stylesheet" href="../../static/css/Admin.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../Navbar/Navbar.html">Home</a>
+            <a href="../Contacts/Contacts.html">Contacts</a>
+            <a href="../Info/Info.html">Info</a>
+            <a href="../Signin/Signin.html">Sign In</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Manage Films</h1>
+
+        <section id="add-film">
+            <h2>Add New Film</h2>
+            <form id="addFilmForm">
+                <label for="filmTitle">Title:</label>
+                <input type="text" id="filmTitle" name="title" required>
+                <label for="filmDescription">Description:</label>
+                <textarea id="filmDescription" name="description" required></textarea>
+                <label for="filmImage">Image URL:</label>
+                <input type="text" id="filmImage" name="image" required>
+                <button type="submit">Add Film</button>
+            </form>
+        </section>
+
+        <section id="film-list">
+            <h2>Film List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="filmTableBody">
+                    <!-- Rows will be dynamically added here by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filmTableBody = document.getElementById('filmTableBody');
+
+            // Sample data
+           let films = [
+                { title: 'Film 1', description: 'Description of Film 1', image: '../../static/image/img1.jpg' },
+                { title: 'Film 2', description: 'Description of Film 2', image: '../../static/image/img2.jpg' }
+            ]; 
+
+            // Function to render film list
+            function renderFilms() {
+                filmTableBody.innerHTML = '';
+                films.forEach((film, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${film.title}</td>
+                        <td>${film.description}</td>
+                        <td><img src="${film.image}" alt="${film.title}" width="100"></td>
+                        <td>
+                            <button onclick="editFilm(${index})">Edit</button>
+                            <button onclick="deleteFilm(${index})">Delete</button>
+                        </td>
+                    `;
+                    filmTableBody.appendChild(row);
+                });
+            }
+
+            // Function to add a new film
+            document.getElementById('addFilmForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newFilm = {
+                    title: e.target.title.value,
+                    description: e.target.description.value,
+                    image: e.target.image.value
+                };
+                films.push(newFilm);
+                renderFilms();
+                e.target.reset();
+            });
+
+            // Function to edit a film
+            window.editFilm = (index) => {
+                const film = films[index];
+                document.getElementById('filmTitle').value = film.title;
+                document.getElementById('filmDescription').value = film.description;
+                document.getElementById('filmImage').value = film.image;
+                document.getElementById('addFilmForm').onsubmit = (e) => {
+                    e.preventDefault();
+                    films[index] = {
+                        title: e.target.title.value,
+                        description: e.target.description.value,
+                        image: e.target.image.value
+                    };
+                    renderFilms();
+                    e.target.reset();
+                    document.getElementById('addFilmForm').onsubmit = addFilmFormSubmit;
+                };
+            };
+
+            // Function to delete a film
+            window.deleteFilm = (index) => {
+                films.splice(index, 1);
+                renderFilms();
+            };
+
+            // Initial rendering of films
+            renderFilms();
+        });
+    </script>
+</body>
+</html>
