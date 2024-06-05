@@ -15,14 +15,14 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="Booking.css" />
+    <link rel="stylesheet" href="../../static/css/Booking.css" th:ref="@{/css/Booking.css}">
   </head>
   <body>
     <div class="center">
       <div class="tickets">
         <div class="ticket-selector">
           <div class="head">
-            <div class="title">Movie Name</div>
+            <div class="title">Movie Name</div> <!-- Movie Name -->
           </div>
           <div class="seats">
             <div class="status">
@@ -94,42 +94,8 @@
         </div>
       </div>
     </div>
-    <script>
-      let seats = document.querySelector(".all-seats");
-      for (var i = 0; i < 59; i++) {
-        let randint = Math.floor(Math.random() * 2);
-        let booked = randint === 1 ? "booked" : "";
-        seats.insertAdjacentHTML(
-          "beforeend",
-          '<input type="checkbox" name="tickets" id="s' +
-            (i + 2) +
-            '" /><label for="s' +
-            (i + 2) +
-            '" class="seat ' +
-            booked +
-            '"><span class="material-icons">event_seat</span></label>'
-        );
-      }
-
-      let tickets = seats.querySelectorAll("input");
-      tickets.forEach((ticket) => {
-        ticket.addEventListener("change", () => {
-          let amount = document.querySelector(".amount").innerHTML;
-          let count = document.querySelector(".count").innerHTML;
-          amount = Number(amount);
-          count = Number(count);
-
-          if (ticket.checked) {
-            count += 1;
-            amount += 200;
-          } else {
-            count -= 1;
-            amount -= 200;
-          }
-          document.querySelector(".amount").innerHTML = amount;
-          document.querySelector(".count").innerHTML = count;
-        });
-      });
+    <script
+      src="../../static/js/Booking.js" th:src="@{/js/Booking.js}" defer>
     </script>
   </body>
 </html>
