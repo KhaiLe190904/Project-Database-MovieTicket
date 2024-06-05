@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const filmTableBody = document.getElementById('filmTableBody');
+    const addFilmForm = document.getElementById('addFilmForm');
 
     // Sample data
-   let films = [
+    let films = [
         { title: 'Film 1', description: 'Description of Film 1', image: '../../static/image/img1.jpg' },
         { title: 'Film 2', description: 'Description of Film 2', image: '../../static/image/img2.jpg' }
-    ]; 
+    ];
 
     // Function to render film list
     function renderFilms() {
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to add a new film
-    document.getElementById('addFilmForm').addEventListener('submit', (e) => {
+    function addFilm(e) {
         e.preventDefault();
         const newFilm = {
             title: e.target.title.value,
@@ -36,7 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
         films.push(newFilm);
         renderFilms();
         e.target.reset();
-    });
+    }
+
+    addFilmForm.addEventListener('submit', addFilm);
 
     // Function to edit a film
     window.editFilm = (index) => {
@@ -44,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('filmTitle').value = film.title;
         document.getElementById('filmDescription').value = film.description;
         document.getElementById('filmImage').value = film.image;
-        document.getElementById('addFilmForm').onsubmit = (e) => {
+
+        addFilmForm.onsubmit = (e) => {
             e.preventDefault();
             films[index] = {
                 title: e.target.title.value,
@@ -53,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             renderFilms();
             e.target.reset();
-            document.getElementById('addFilmForm').onsubmit = addFilmFormSubmit;
+            addFilmForm.onsubmit = addFilm;
         };
     };
 

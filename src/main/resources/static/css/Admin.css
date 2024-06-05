@@ -1,46 +1,96 @@
+/* Base Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
+/* Header Navigation Styling */
 header nav {
     display: flex;
     justify-content: space-around;
-    background-color: #333;
+    background-color: #444;
     padding: 1em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header nav a {
     color: white;
     text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
+header nav a:hover {
+    color: #ff6347;
+}
+
+/* Main Content Styling */
 main {
-    margin: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em auto;
+    max-width: 1200px; /* Increased the max-width for a wider layout */
+    background: white;
+    padding: 2em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
 }
 
+/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
+    max-width: 600px; /* Adjusted the max-width for the form */
     margin-bottom: 2em;
 }
 
 form label {
     margin: 0.5em 0 0.2em;
+    font-weight: bold;
 }
 
 form input, form textarea, form button {
-    padding: 0.5em;
+    padding: 0.8em;
     margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
 }
 
+form input:focus, form textarea:focus, form button:focus {
+    border-color: #ff6347;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255,99,71,0.5);
+}
+
+form button {
+    background-color: #ff6347;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+form button:hover {
+    background-color: #e5533c;
+    transform: scale(1.05);
+}
+
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
+    margin: 2em 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 table, th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
 }
 
 th, td {
@@ -48,7 +98,36 @@ th, td {
     text-align: left;
 }
 
+th {
+    background-color: #f4f4f4;
+}
+
+td {
+    background-color: #fff;
+}
+
+tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+/* Button Styling */
 button {
     padding: 0.5em 1em;
     margin-right: 0.5em;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff6347;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #e5533c;
+    transform: scale(1.05);
+}
+
+/* Centering Headings */
+h1, h2 {
+    text-align: center;
 }
