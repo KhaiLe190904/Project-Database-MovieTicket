@@ -23,6 +23,72 @@ header a{
     color: #eee;
     margin-right: 40px;
 }
+/* Additional content */
+.additional-content {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie-card {
+    width: 200px;
+    background-color: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+.movie-card h3, .movie-card p {
+    color: #fff;
+    margin: 10px 0;
+}
+
+.movie-card button {
+    padding: 10px 20px;
+    background-color: #f1683a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Animation for movie cards */
+.movie-card:hover {
+    transform: translateY(-10px);
+}
+
+.movie-card:hover button {
+    background-color: #ff6347;
+}
+
+/* Animation for additional content */
+.additional-content {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: showAdditionalContent 1s forwards;
+}
+
+@keyframes showAdditionalContent {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* carousel */
 .carousel{
     height: 100vh;
