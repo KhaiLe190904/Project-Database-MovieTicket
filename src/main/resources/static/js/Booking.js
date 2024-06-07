@@ -1,5 +1,4 @@
 let seats = document.querySelector(".all-seats");
-<<<<<<< HEAD
 
 // Rows from A to F and columns from 1 to 10
 const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -8,22 +7,6 @@ const cols = 10;
 // Function to generate seat labels
 function generateSeatLabel(row, col) {
   return `${row}${col}`;
-=======
-for (var i = 0; i < 59; i++) {
-  let randint = Math.floor(Math.random() * 2);
-  let booked = randint === 1 ? "booked" : "";
-  let disabled = booked === "booked" ? "disabled" : "";
-  seats.insertAdjacentHTML(
-    "beforeend",
-    '<input type="checkbox" name="tickets" id="s' +
-      (i + 2) +
-      '" ' + disabled + ' /><label for="s' +
-      (i + 2) +
-      '" class="seat ' +
-      booked +
-      '"><span class="material-icons">event_seat</span></label>'
-  );
->>>>>>> d873345f72e379903ea786de572c60543d3857a4
 }
 
 // Generating 60 seats (6 rows, 10 seats each)
