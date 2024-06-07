@@ -1,0 +1,84 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    backface-visibility: inherit;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+}
+
+button.btn-info {
+    background-color: #17a2b8;
+    border: none;
+    border-radius: 5px;
+}
+
+button.btn-info:hover {
+    background-color: #138496;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+textarea.form-control {
+    resize: none;
+    height: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .col-md-6 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    button.btn-info.col-2 {
+        width: 100%;
+    }
+}
+/* Center-align and stretch input fields */
+.form-control {
+    border-radius: 5px;
+    width: 100%; /* Stretch input fields */
+    margin: auto; /* Center-align */
+    display: block; /* Ensure block-level display */
+}
+
+/* Adjust textarea height */
+textarea.form-control {
+    resize: none;
+    height: 100px; /* Adjust height as needed */
+}
