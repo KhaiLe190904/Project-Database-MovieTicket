@@ -201,8 +201,8 @@ header a{
     align-items: center;
 }
 .arrows button{
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: #eee4;
     border: none;
@@ -375,6 +375,9 @@ header a{
 }
 .des{
     font-size: 1.5em;
+<<<<<<< HEAD
     font-weight: 300;
     line-height: 1.5em;
+=======
+>>>>>>> d873345f72e379903ea786de572c60543d3857a4
 }
