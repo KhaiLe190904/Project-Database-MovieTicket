@@ -20,7 +20,7 @@ public class Role {
     public int id;
 
     @Column(name="role_name", unique = true, nullable = false)
-    private String roleName;
+    private String name;
     @ManyToMany
     @JoinTable(
             name = "users_roles",
@@ -29,5 +29,8 @@ public class Role {
     )
     private List<User> users;
 
+    public Role(String name) {
+        this.name = name;
+    }
 }
 

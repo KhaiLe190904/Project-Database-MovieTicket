@@ -15,7 +15,7 @@ for (let row = 0; row < rows.length; row++) {
   for (let col = 1; col <= cols; col++) {
     seatIndex++;
     let randint = Math.floor(Math.random() * 2);
-    let booked = randint === 1 ? "" : "";
+    let booked = randint === 1 ? "booked" : "";
     let disabled = booked === "booked" ? "disabled" : "";
     let seatLabel = generateSeatLabel(rows[row], col);
     

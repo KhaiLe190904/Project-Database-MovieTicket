@@ -1,10 +1,13 @@
 package com.webbookingticket.fullstack.controller;
 
+import com.webbookingticket.fullstack.dto.UserRegistrationDto;
 import com.webbookingticket.fullstack.model.Movie;
+import com.webbookingticket.fullstack.model.User;
 import com.webbookingticket.fullstack.service.MovieService;
 import com.webbookingticket.fullstack.service.MovieServiceImpl;
 import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/movies")
 public class MovieController {
     private final MovieServiceImpl movieServiceImpl;
     private MovieService movieService;
@@ -24,6 +26,11 @@ public class MovieController {
     public MovieController(MovieService theMovieService, MovieServiceImpl movieServiceImpl){
         movieService = theMovieService;
         this.movieServiceImpl = movieServiceImpl;
+    }
+
+    @ModelAttribute("user")
+    public UserRegistrationDto getUserRegistrationDto() {
+        return new UserRegistrationDto();
     }
 
     @GetMapping("")
