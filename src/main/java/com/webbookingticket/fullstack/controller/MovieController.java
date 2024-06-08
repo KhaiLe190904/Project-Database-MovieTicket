@@ -33,7 +33,7 @@ public class MovieController {
         return new UserRegistrationDto();
     }
 
-    @GetMapping("")
+    @GetMapping("/home")
     public String listMovieAtHome(Model theModel){
         // get the movies from db
         List<Movie> theMovies = movieService.findAll();
