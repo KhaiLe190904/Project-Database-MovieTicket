@@ -12,7 +12,7 @@
 <body>
 <div class="signup">
     <div class="wrapper">
-        <form action="../../Signin/Signin.html" th:action="@{/signin}" method="GET">
+        <form id="signupForm" onsubmit="showPopup(event)">
             <h1>Sign up</h1>
             <div class="inputbox">
                 <input type="text" name="signUpUserName" placeholder="Username" required>
@@ -28,7 +28,8 @@
             </div>
             <div class="inputbox">
                 <input type="text" name="name" placeholder="Full name" required>
-                <i class="fa-solid fa-address-card icon"></i>            </div>
+                <i class="fa-solid fa-address-card icon"></i>
+            </div>
             <div class="inputbox">
                 <input type="text" name="phoneNumber" placeholder="Phone Number" required>
                 <i class="fa-solid fa-phone icon"></i>
@@ -40,5 +41,16 @@
         </form>
     </div>
 </div>
+<div id="popup" class="popup">Sign Up Successful! Redirecting to sign in page...</div>
+
+<script>
+    function showPopup(event) {
+        event.preventDefault();
+        document.getElementById('popup').style.display = 'block';
+        setTimeout(function() {
+            window.location.href = '/signin';
+        }, 3000);
+    }
+</script>
 </body>
 </html>
