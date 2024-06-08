@@ -111,7 +111,7 @@ INSERT INTO rooms (name) VALUES
 ('Room 5');
 GO
 
--- THÊM INSERT SCHEDULE
+-- THï¿½M INSERT SCHEDULE
 
 -- Assuming movie_ids and room_ids are sequential and start from 1
 
@@ -136,7 +136,7 @@ INSERT INTO schedules(start, movie_id, room_id, update_at, create_at) VALUES
 
 
 -- Insert users
- 
+
 INSERT INTO users (username, password, full_name, email, address, sdt, update_at, create_at) VALUES
 ('user1', 'Johndepzai23', 'John Smith', 'john.smith@gmail.com', '123 Main St, London, UK', '44791123456', GETDATE(), GETDATE()),
 ('user2', 'Emmaxinhgai@', 'Emma Brown', 'emma.brown@gmail.com', '456 Elm St, Sydney, Australia', '6121235678', GETDATE(), GETDATE()),
@@ -152,7 +152,7 @@ INSERT INTO users (username, password, full_name, email, address, sdt, update_at
 ('user12', 'Miaminua231', 'Mia Kim', 'mia.kim@gmail.com', '909 Willow Li, Tokyo, Japan', '+8153235678', GETDATE(), GETDATE()),
 ('user13', 'Lucas@4124', 'Lucas Davis', 'lucas.davis@gmail.com', '1010 Chestnut St, Cape Town, South Africa', '2721234567', GETDATE(), GETDATE()),
 ('user14', 'Ameliachuara', 'Amelia Martinez', 'amelia.martinez@gmail.com', '1111 Redwood St, Buenos Aires, Argentina', '1112345678', GETDATE(), GETDATE()),
-('user15', 'Mason7623', 'Mason Wilson', 'mason.wilson@gmail.com', '1212 Cypress St, São Paulo, Brazil', '65845734754', GETDATE(), GETDATE());
+('user15', 'Mason7623', 'Mason Wilson', 'mason.wilson@gmail.com', '1212 Cypress St, Sï¿½o Paulo, Brazil', '65845734754', GETDATE(), GETDATE());
 GO
 
 
