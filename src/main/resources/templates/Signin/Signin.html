@@ -11,7 +11,7 @@
 <body>
 <div class="signin">
     <div class="wrapper">
-        <form id="signinForm" onsubmit="showPopup(event)">
+        <form action="/" method="GET">
             <h1>Sign In</h1>
             <div class="inputbox">
                 <input type="text" name="signInUserName" placeholder="Username" required>
@@ -28,16 +28,5 @@
         </form>
     </div>
 </div>
-<div id="popup" class="popup">Sign In Successful! Redirecting to homepage...</div>
-
-<script>
-    function showPopup(event) {
-        event.preventDefault();
-        document.getElementById('popup').style.display = 'block';
-        setTimeout(function() {
-            window.location.href = '/';
-        }, 3000);
-    }
-</script>
 </body>
 </html>
