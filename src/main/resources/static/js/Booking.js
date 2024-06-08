@@ -18,7 +18,7 @@ for (let row = 0; row < rows.length; row++) {
     let booked = randint === 1 ? "booked" : "";
     let disabled = booked === "booked" ? "disabled" : "";
     let seatLabel = generateSeatLabel(rows[row], col);
-    
+
     seats.insertAdjacentHTML(
       "beforeend",
       '<input type="checkbox" name="tickets" id="s' +
