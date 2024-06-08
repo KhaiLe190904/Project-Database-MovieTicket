@@ -54,3 +54,13 @@ tickets.forEach((ticket) => {
     document.querySelector(".count").innerHTML = count;
   });
 });
+
+document.getElementById("bookButton").addEventListener("click", showPopup);
+
+function showPopup() {
+  let popup = document.getElementById('popup');
+  popup.style.display = 'block';
+  setTimeout(function() {
+    window.location.href = '/';
+  }, 3000);
+}
