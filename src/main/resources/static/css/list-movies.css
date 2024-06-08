@@ -1,55 +1,109 @@
-/* Custom CSS for Movie Directory page */
+/* Căn chỉnh và làm đẹp cho toàn bộ trang */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1aa56b;
+}
+a {
+    text-decoration: none;
 
-/* Style for the table */
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
+}
+header{
+    width: 1140px;
+    max-width: 100%;
+    margin-left: 20px;
+    height: 10px;
+    align-items: center;
+    position: relative;
+}
+header a{
+    color: #e9dbdb;
+    margin-right: 20px;
+}
+h2 {
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #343a40;
+    color: #fff;
+    background-image: linear-gradient(45deg, #343a40, #343a40 33%, #007bff 33%, #007bff 66%, #28a745 66%)
+
+}
+.container {
+    width: inherit;
+    height: 100%;
+    margin: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    background: linear-gradient(to right, rgb(58, 121, 76), rgb(168, 159, 142));
 }
 
-/* Style for table header */
-.table th,
-.table td {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
+
+/* Nút thêm phim */
+.btn-primary {
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.btn-primary:hover {
+    transform: scale(1.1);
+}
+
+/* Bảng */
+table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-repeat: inherit;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.table th {
+    padding: 5px;
     text-align: center;
 }
-
-/* Style for table header in dark background */
-.table-dark {
-    color: #fff;
-    background-color: #343a40;
+.table td{
+    padding: 5px;
+    text-align: justify;
+    image-rendering: auto;
 }
 
-/* Style for table rows */
-.table tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
+
+.table th {
+    background-color: #0f467e;
+    color: #dddddd;
+    position: relative;
+    top: 0;
+    z-index: 2;
+
+}
+.table tbody tr:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background-color: burlywood;
 }
 
-/* Style for table actions buttons */
-.btn {
-    padding: 0.375rem 0.75rem;
-    margin-bottom: 0;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
+/* Hình ảnh poster */
+.table img {
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Style for Add Movie button */
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+.table img:hover {
+    transform: scale(1.05) rotate(3deg);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Style for Update button */
-.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-}
-
-/* Style for Delete button */
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
+/* Link trailer */
+.table a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
 }

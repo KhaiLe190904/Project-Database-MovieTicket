@@ -20,7 +20,7 @@ h2 {
     background-image: linear-gradient(45deg, #343a40, #343a40 33%, #007bff 33%, #007bff 66%, #28a745 66%)
 
 }
-
+.btn
 /* Nút thêm phim */
 .btn-primary {
     transition: transform 0.3s;
