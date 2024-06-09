@@ -19,7 +19,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class ScheduleDto {
-    public int id;
 
     private Date start;
 
