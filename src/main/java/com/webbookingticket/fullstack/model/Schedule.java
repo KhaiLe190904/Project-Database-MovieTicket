@@ -24,11 +24,11 @@ public class Schedule{
     @Column(name="start", nullable = false)
     private Date start;
 
-    @ManyToOne
-    @JoinColumn(name="movie_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="room_id", nullable = false)
     private Room room;
 
@@ -37,4 +37,14 @@ public class Schedule{
 
     @Column(name="create_at")
     private LocalDateTime createAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createAt = updateAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updateAt = LocalDateTime.now();
+    }
 }

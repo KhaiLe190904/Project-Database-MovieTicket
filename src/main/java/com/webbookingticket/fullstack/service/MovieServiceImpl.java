@@ -1,8 +1,11 @@
 package com.webbookingticket.fullstack.service;
 
 import com.webbookingticket.fullstack.model.Movie;
+import com.webbookingticket.fullstack.model.Schedule;
 import com.webbookingticket.fullstack.repository.MovieRepository;
+import com.webbookingticket.fullstack.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +15,9 @@ import java.util.Optional;
 public class MovieServiceImpl implements MovieService{
 
     private MovieRepository movieRepository;
+
+    @Autowired
+    private ScheduleRepository scheduleRepository;
 
     @Autowired
     public MovieServiceImpl(MovieRepository theMovieRepository){
@@ -42,6 +48,12 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public void deleteById(int theId) {
+        List<Schedule> schedules = scheduleRepository.findByMovieId(theId);
+        if (!schedules.isEmpty()) {
+            // Handle schedules before deleting movie
+            // e.g., throw an exception or remove schedules
+            throw new DataIntegrityViolationException("Cannot delete movie, as it is referenced by schedules.");
+        }
         movieRepository.deleteById(theId);
     }
 

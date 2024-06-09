@@ -11,7 +11,7 @@ CREATE TABLE movies (
   release_date DATE,
   duration float NOT NULL,
   trailer_url VARCHAR(MAX),
-  is_showing bit,
+  is_showing integer,
   poster_url VARCHAR(MAX),
   update_at DATETIME,
   create_at DATETIME
@@ -90,19 +90,17 @@ CREATE TABLE users_roles (
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (role_id) REFERENCES roles(id)
 );
-
 -- Insert movies
 INSERT INTO movies (name, description, director, actors, moviecategory, release_date, duration, trailer_url, is_showing, poster_url, update_at, create_at)
 VALUES
 ('Haikyuu!!', 'Will you follow team Crow or team Cat?', 'Susumu Mitsunaka', 'Hinata, Kagayama', 'Anime', '2024-05-17', 120, 'https://www.youtube.com/watch?v=OFB4mrupFX0', 1, 'https://i.pinimg.com/736x/78/54/40/7854404bc725690ba96d55a990382dc1.jpg', GETDATE(), GETDATE()),
-('Movie 2', 'Description 2', 'Director 2', 'Actor 3, Actor 4', 'Drama', '2024-02-01', 100, 'http://trailer2.com', 1, 'http://poster2.com', GETDATE(), GETDATE()),
-('Movie 3', 'Description 3', 'Director 3', 'Actor 5, Actor 6', 'Comedy', '2024-03-01', 110, 'http://trailer3.com', 1, 'http://poster3.com', GETDATE(), GETDATE()),
-('Movie 4', 'Description 4', 'Director 4', 'Actor 7, Actor 8', 'Horror', '2024-04-01', 90, 'http://trailer4.com', 1, 'http://poster4.com', GETDATE(), GETDATE()),
-('Movie 5', 'Description 5', 'Director 5', 'Actor 9, Actor 10', 'Sci-Fi', '2024-05-01', 130, 'http://trailer5.com', 1, 'http://poster5.com', GETDATE(), GETDATE()),
-('Movie 6', 'Description 6', 'Director 6', 'Actor 11, Actor 12', 'Thriller', '2024-06-01', 105, 'http://trailer6.com', 1, 'http://poster6.com', GETDATE(), GETDATE()),
-('Movie 7', 'Description 7', 'Director 7', 'Actor 13, Actor 14', 'Romance', '2024-07-01', 115, 'http://trailer7.com', 1, 'http://poster7.com', GETDATE(), GETDATE()),
-('Movie 8', 'Description 8', 'Director 8', 'Actor 15, Actor 16', 'Adventure', '2024-08-01', 125, 'http://trailer8.com', 1, 'http://poster8.com', GETDATE(), GETDATE());
-GO
+('Doraemon', 'Robot cat from the future', 'Imai KazuAki', 'Subaru Kimura, Oyama Nobuyo', 'Anime', '2024-02-01', 100, 'https://www.youtube.com/watch?v=Yug8gbDd5EQ', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkR9XFC68ZwwZNnxmU4owosfg8mW5fIWkZEQ&s', GETDATE(), GETDATE()),
+('Conan', 'Famous detective Conan', 'John Milius', 'Takayama Minami, Takagi Wataru', 'Detective', '2024-03-01', 110, 'https://www.youtube.com/watch?v=YWSC_Qh8b_k', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqcZpVws4mD-f3yKNkGj6fy2mZST_qA8lbrzpuIcxOm-s3Q_N-pePo0ydfCDAFQ06kGoI&usqp=CAU', GETDATE(), GETDATE()),
+('Harry Potter', 'a series of seven fantasy movies', 'Chris Columbus', 'Daniel Radcliffe, Emma Watson', 'Magic', '2024-04-01', 90, 'https://www.youtube.com/watch?v=yBAGclXF3Jk', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_HdTzrqt3vd3BMqaYoyrSOB_TQYGkIriNog&s', GETDATE(), GETDATE()),
+('Haloween', 'The plot centers on a mental patient', 'Rob Zombie', 'Jamie Lee, John Carpenter', 'Horror', '2024-05-01', 130, 'https://www.youtube.com/watch?v=ek1ePFp-nBI', 1, 'https://i.ytimg.com/vi/ek1ePFp-nBI/sddefault.jpg', GETDATE(), GETDATE()),
+('Bastard', 'become suspects and potential victims', 'Heavy Metal', 'Kisho Taniyama, Kusunori Tomori', 'Thriller', '2024-06-01', 105, 'https://www.youtube.com/watch?v=8y4aT2Am6Us', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgj1Ije2hYE2DhjUfuVjetK9gDvQRXq4IIbQ&s', GETDATE(), GETDATE()),
+('Your Name', 'Two teenagers share a profound, magical connection upon discovering they are swapping bodies.', 'Shinkai Makoto', 'kamiki Ryunosuke, Kamishiraishi Mone', 'Romance', '2024-07-01', 115, 'https://www.youtube.com/watch?v=_mifHzxFNQ4', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyGn2TG18MomSf_u81A3VObvl31yBF9567EA&s', GETDATE(), GETDATE()),
+('The Lord of the Rings', 'To destroy the One Ring and thwart Sauron ambitions, a fellowship is formed', 'Viggo Mortensen', 'Elijah Wood, Sean Astin', 'Adventure', '2024-08-01', 125, 'https://www.youtube.com/watch?v=TCwmXY_f-e0', 1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREUhUrHh4yahRYlL5_u-Sl4fei4XQSkleQpg&s', GETDATE(), GETDATE());
 
 -- Insert rooms
 INSERT INTO rooms (name) VALUES
@@ -113,92 +111,66 @@ INSERT INTO rooms (name) VALUES
 ('Room 5');
 GO
 
--- THÊM INSERT SCHEDULE
+-- THï¿½M INSERT SCHEDULE
 
+-- Assuming movie_ids and room_ids are sequential and start from 1
 
-
-
-
-
-
+INSERT INTO schedules(start, movie_id, room_id, update_at, create_at) VALUES
+('2024-06-01 10:00:00', 41, 1, GETDATE(), GETDATE()),
+('2024-06-01 13:00:00', 42, 2, GETDATE(), GETDATE()),
+('2024-06-01 16:00:00', 43, 3, GETDATE(), GETDATE()),
+('2024-06-01 19:00:00', 44, 4, GETDATE(), GETDATE()),
+('2024-06-02 10:00:00', 45, 5, GETDATE(), GETDATE()),
+('2024-06-02 13:00:00', 46, 1, GETDATE(), GETDATE()),
+('2024-06-02 16:00:00', 47, 2, GETDATE(), GETDATE()),
+('2024-06-02 19:00:00', 48, 3, GETDATE(), GETDATE()),
+('2024-06-03 10:00:00', 41, 4, GETDATE(), GETDATE()),
+('2024-06-03 13:00:00', 42, 5, GETDATE(), GETDATE()),
+('2024-06-03 16:00:00', 43, 1, GETDATE(), GETDATE()),
+('2024-06-03 19:00:00', 44, 2, GETDATE(), GETDATE()),
+('2024-06-04 10:00:00', 45, 3, GETDATE(), GETDATE()),
+('2024-06-04 13:00:00', 46, 4, GETDATE(), GETDATE()),
+('2024-06-04 16:00:00', 47, 5, GETDATE(), GETDATE()),
+('2024-06-04 19:00:00', 48, 1, GETDATE(), GETDATE());
 
 
 
 -- Insert users
+
 INSERT INTO users (username, password, full_name, email, address, sdt, update_at, create_at) VALUES
-('admin', 'admin', 'ADMIN', 'admin@gmail.com', '***', '***', GETDATE(), GETDATE()),
-('user1', 'password1', 'Full Name 1', 'user1@example.com', 'Address 1', '1234567890', GETDATE(), GETDATE()),
-('user2', 'password2', 'Full Name 2', 'user2@example.com', 'Address 2', '0987654321', GETDATE(), GETDATE()),
-('user3', 'password3', 'Full Name 3', 'user3@example.com', 'Address 3', '1122334455', GETDATE(), GETDATE()),
-('user4', 'password4', 'Full Name 4', 'user4@example.com', 'Address 4', '5566778899', GETDATE(), GETDATE()),
-('user5', 'password5', 'Full Name 5', 'user5@example.com', 'Address 5', '6677889900', GETDATE(), GETDATE()),
-('user6', 'password6', 'Full Name 6', 'user6@example.com', 'Address 6', '7788990011', GETDATE(), GETDATE()),
-('user7', 'password7', 'Full Name 7', 'user7@example.com', 'Address 7', '8899001122', GETDATE(), GETDATE()),
-('user8', 'password8', 'Full Name 8', 'user8@example.com', 'Address 8', '9900112233', GETDATE(), GETDATE()),
-('user9', 'password9', 'Full Name 9', 'user9@example.com', 'Address 9', '1010101010', GETDATE(), GETDATE()),
-('user10', 'password10', 'Full Name 10', 'user10@example.com', 'Address 10', '2020202020', GETDATE(), GETDATE()),
-('user11', 'password11', 'Full Name 11', 'user11@example.com', 'Address 11', '3030303030', GETDATE(), GETDATE()),
-('user12', 'password12', 'Full Name 12', 'user12@example.com', 'Address 12', '4040404040', GETDATE(), GETDATE()),
-('user13', 'password13', 'Full Name 13', 'user13@example.com', 'Address 13', '5050505050', GETDATE(), GETDATE()),
-('user14', 'password14', 'Full Name 14', 'user14@example.com', 'Address 14', '6060606060', GETDATE(), GETDATE()),
-('user15', 'password15', 'Full Name 15', 'user15@example.com', 'Address 15', '7070707070', GETDATE(), GETDATE());
+('user1', 'Johndepzai23', 'John Smith', 'john.smith@gmail.com', '123 Main St, London, UK', '44791123456', GETDATE(), GETDATE()),
+('user2', 'Emmaxinhgai@', 'Emma Brown', 'emma.brown@gmail.com', '456 Elm St, Sydney, Australia', '6121235678', GETDATE(), GETDATE()),
+('user3', 'Liamso1', 'Liam Johnson', 'liam.johnson@gmail.com', '789 Oak St, Toronto, Canada', '14165554367', GETDATE(), GETDATE()),
+('user4', 'Oliviatocdai', 'Olivia Williams', 'olivia.williams@gmail.com', '101 Pine St, Auckland, New Zealand', '6491234567', GETDATE(), GETDATE()),
+('user5', 'Noah214', 'Noah Jones', 'noah.jones@gmail.com', '202 Maple St, Dublin, Ireland', '35312345678', GETDATE(), GETDATE()),
+('user6', 'Avacotu', 'Ava Garcia', 'ava.garcia@gmail.com', '303 Birch St, Barcelona, Spain', '348543678', GETDATE(), GETDATE()),
+('user7', 'Millerdep', 'William Miller', 'william.miller@gmail.com', '404 Cedar St, Berlin, Germany', '4932345678', GETDATE(), GETDATE()),
+('user8', 'Sophiacodon', 'Sophia Martinez', 'sophia.martinez@gmail.com', '505 Spruce St, Paris, France', '+3323456764', GETDATE(), GETDATE()),
+('user9', 'Jamesxauxi', 'James Rodriguez', 'james.rodriguez@gmail.com', '606 Ash St, Rome, Italy', '78394547327', GETDATE(), GETDATE()),
+('user10', 'Isabellachuany', 'Isabella Hernandez', 'isabella.hernandez@gmail.com', '707 Palm St, Lisbon, Portugal', '5121123567', GETDATE(), GETDATE()),
+('user11', 'Benjaminkaiiu', 'Benjamin Lee', 'benjamin.lee@gmail.com', '808 Fir St, Seoul, South Korea', '78221234567', GETDATE(), GETDATE()),
+('user12', 'Miaminua231', 'Mia Kim', 'mia.kim@gmail.com', '909 Willow Li, Tokyo, Japan', '+8153235678', GETDATE(), GETDATE()),
+('user13', 'Lucas@4124', 'Lucas Davis', 'lucas.davis@gmail.com', '1010 Chestnut St, Cape Town, South Africa', '2721234567', GETDATE(), GETDATE()),
+('user14', 'Ameliachuara', 'Amelia Martinez', 'amelia.martinez@gmail.com', '1111 Redwood St, Buenos Aires, Argentina', '1112345678', GETDATE(), GETDATE()),
+('user15', 'Mason7623', 'Mason Wilson', 'mason.wilson@gmail.com', '1212 Cypress St, Sï¿½o Paulo, Brazil', '65845734754', GETDATE(), GETDATE());
 GO
 
-CREATE PROCEDURE InsertTicket
-    @seat NVARCHAR(10),
-    @user_id INT,
-    @room_id INT,
-    @schedule_id INT,
-    @price DECIMAL
-AS
-BEGIN
-    DECLARE @bill_id INT;
-    DECLARE @total_price DECIMAL;
 
-    -- Check if a bill already exists for this user_id, room_id, and schedule_id
-    SELECT @bill_id = id
-    FROM bills
-    WHERE user_id = @user_id
-      AND id IN (SELECT bill_id FROM tickets WHERE room_id = @room_id AND schedule_id = @schedule_id);
+INSERT INTO bills(user_id, total_price) VALUES
+(1, 0),
+(2, 0),
+(3, 0),
+(4, 0),
+(5, 0),
+(6, 0),
+(7, 0);
 
-    -- If no existing bill is found, create a new bill
-    IF @bill_id IS NULL
-    BEGIN
-        INSERT INTO bills (user_id, total_price)
-        VALUES (@user_id, @price);
-        SET @bill_id = SCOPE_IDENTITY();
-    END
-    ELSE
-    BEGIN
-        -- Update the total price of the existing bill
-        SELECT @total_price = total_price FROM bills WHERE id = @bill_id;
-        SET @total_price = @total_price + @price;
-        UPDATE bills
-        SET total_price = @total_price
-        WHERE id = @bill_id;
-    END
+INSERT INTO tickets(seat, user_id, room_id, schedule_id, bill_id, price) VALUES
+('A2', 2, 1, 3, 18 , 15.00),
+('A3', 2, 1, 3, 18 , 15.00),
+('A4', 2, 1, 3, 18 , 15.00);
 
-    -- Insert the ticket
-    INSERT INTO tickets (seat, user_id, room_id, schedule_id, bill_id, price)
-    VALUES (@seat, @user_id, @room_id, @schedule_id, @bill_id, @price);
-END;
 
-EXEC InsertTicket 'A1', 2, 1, 1, 15.00;
-EXEC InsertTicket 'A2', 2, 1, 1, 15.00;
-EXEC InsertTicket 'A3', 2, 2, 2, 15.00;
-EXEC InsertTicket 'B1', 3, 3, 3, 15.00;
-EXEC InsertTicket 'B2', 4, 4, 4, 15.00;
-EXEC InsertTicket 'C1', 5, 5, 5, 15.00;
-EXEC InsertTicket 'C2', 6, 1, 6, 40.00;
-EXEC InsertTicket 'D1', 7, 2, 7, 45.00;
-EXEC InsertTicket 'D2', 8, 3, 8, 50.00;
-EXEC InsertTicket 'E1', 9, 4, 9, 55.00;
-EXEC InsertTicket 'E2', 10, 5, 10, 60.00;
-EXEC InsertTicket 'F1', 11, 1, 11, 65.00;
-EXEC InsertTicket 'F2', 12, 2, 12, 70.00;
-EXEC InsertTicket 'G1', 13, 3, 13, 75.00;
-EXEC InsertTicket 'G2', 14, 4, 14, 80.00;
-EXEC InsertTicket 'H1', 15, 5, 15, 85.00;
 
 
 -- Insert roles

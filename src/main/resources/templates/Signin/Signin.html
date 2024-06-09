@@ -1,43 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
+    <!-- Ensure this path is correct and accessible -->
     <link rel="stylesheet" href="../../static/css/Signin.css" th:href="@{/css/Signin.css}">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
+<br /><br />
 <div class="signin">
     <div class="wrapper">
-        <form id="signinForm" onsubmit="showPopup(event)">
+        <!-- Display error message if login fails -->
+        <div th:if="${param.error}">
+            <div class="alert alert-danger col-xs-offset-1 col-xs-10">Invalid Username or Password</div>
+        </div>
+        <!-- Display message on successful logout -->
+        <div th:if="${param.logout}">
+            <div class="alert alert-success col-xs-offset-1 col-xs-10"> You have been logged out.</div>
+        </div>
+        <!-- Form submission to /authenticateTheUser handled by Spring Security -->
+        <form action="#" th:action="@{/authenticateTheUser}" method="post">
             <h1>Sign In</h1>
             <div class="inputbox">
-                <input type="text" name="signInUserName" placeholder="Username" required>
+                <input type="text" name="username" placeholder="Username" required>
                 <i class="fas fa-user icon"></i>
             </div>
             <div class="inputbox">
-                <input type="password" name="signInPassWord" placeholder="Password" required>
+                <input type="password" name="password" placeholder="Password" required>
                 <i class="fas fa-lock icon"></i>
             </div>
             <button type="submit">Sign In</button>
             <div class="register">
-                <p>Don't have an account? <a href="../Signup/Signup.html" th:href="@{/signup}">Sign Up</a></p>
+                <p>Don't have an account? <a th:href="@{/signup}">Sign Up</a></p>
             </div>
         </form>
     </div>
 </div>
-<div id="popup" class="popup">Sign In Successful! Redirecting to homepage...</div>
-
-<script>
-    function showPopup(event) {
-        event.preventDefault();
-        document.getElementById('popup').style.display = 'block';
-        setTimeout(function() {
-            window.location.href = '/';
-        }, 3000);
-    }
-</script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,47 +10,45 @@
 </head>
 
 <body>
+<br /><br /><br />
 <div class="signup">
     <div class="wrapper">
-        <form id="signupForm" onsubmit="showPopup(event)">
+        <div th:if="${param.success}" >
+            <div class="alert alert-info">You've successfully registered</div>
+        </div>
+        <form th:action="@{/signup}" method="post" th:object="${user}">
             <h1>Sign up</h1>
             <div class="inputbox">
-                <input type="text" name="signUpUserName" placeholder="Username" required>
+                <input type="text" th:field="*{username}" placeholder="Username" required autofucus="autofocus">
                 <i class="fas fa-user icon"></i>
             </div>
             <div class="inputbox">
-                <input type="password" name="signUppassWord" placeholder="Password" required>
+                <input type="password" th:field="*{password}" placeholder="Password" required>
                 <i class="fas fa-lock icon"></i>
             </div>
             <div class="inputbox">
-                <input type="text" name="email" placeholder="Email" required>
+                <input type="email" th:field="*{email}" placeholder="Email" required>
                 <i class="fa-solid fa-envelope icon"></i>
             </div>
             <div class="inputbox">
-                <input type="text" name="name" placeholder="Full name" required>
+                <input type="text" th:field="*{fullName}" placeholder="Full Name" required>
                 <i class="fa-solid fa-address-card icon"></i>
             </div>
             <div class="inputbox">
-                <input type="text" name="phoneNumber" placeholder="Phone Number" required>
+                <input type="text" th:field="*{sdt}" placeholder="Phone Number" required>
                 <i class="fa-solid fa-phone icon"></i>
             </div>
+            <div class="inputbox">
+                <input type="text" th:field="*{address}" placeholder="Address" required>
+                <i class="fa-solid fa-address-card icon"></i>
+            </div>
+
             <button type="submit">Sign Up</button>
             <div class="register">
-                <p>Have an account? <a href="../Signin/Signin.html" th:href="@{/signin}">Sign In</a></p>
+                <p>Have an account? <a href="/" th:href="@{/signin}">Sign In</a></p>
             </div>
         </form>
     </div>
 </div>
-<div id="popup" class="popup">Sign Up Successful! Redirecting to sign in page...</div>
-
-<script>
-    function showPopup(event) {
-        event.preventDefault();
-        document.getElementById('popup').style.display = 'block';
-        setTimeout(function() {
-            window.location.href = '/signin';
-        }, 3000);
-    }
-</script>
 </body>
 </html>

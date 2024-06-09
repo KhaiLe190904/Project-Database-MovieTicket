@@ -13,11 +13,18 @@
             <a href="../Navbar/Navbar.html" th:href="@{/}" >Home</a>
             <a href="">Contacts</a>
             <a href="">Info</a>
-            <a href="../Signin/Signin.html" th:href="@{/signin}">Sign In</a>
-            <a href="../Signup/Signup.html" th:href="@{/signup}">Sign Up</a>
+            <div>
+                <form action="#" th:action="@{/logout}" method="POST">
+                    <input type="submit" value="Logout" />
+                </form>
+            </div>
+
+            <!-- Add Sign In and Sign Up links for non-authenticated users -->
+<!--            <a href="../Signin/Signin.html" th:href="@{/signin}">Sign In</a>-->
+<!--            <a href="../Signup/Signup.html" th:href="@{/signup}">Sign Up</a>-->
+                <!-- Logout link (optional) -->
         </nav>
     </header>
-
     <!-- carousel -->
     <div class="carousel">
         <!-- list item -->

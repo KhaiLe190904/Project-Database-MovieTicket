@@ -11,11 +11,20 @@
 <body>
 <header>
     <nav>
-        <a href="../../Navbar/Navbar.html" th:href="@{/movies}">Home</a>
+        <a href="../../Navbar/Navbar.html" th:href="@{/movies/home}">Home</a>
         <a href="../../Contacts/Contacts.html">Contacts</a>
         <a href="../../Info/Info.html">Info</a>
     </nav>
 </header>
+<!-- Success Message -->
+<div th:if="${message}" class="alert alert-success">
+    <span th:text="${message}"></span>
+</div>
+
+<!-- Error Message -->
+<div th:if="${errorMessage}" class="alert alert-danger">
+    <span th:text="${errorMessage}"></span>
+</div>
 <br><br>
 <div class="container">
     <h2>Movie Directory</h2>

@@ -45,7 +45,7 @@ public class User {
     @Column(name="create_at")
     private LocalDateTime createAt;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -53,4 +53,13 @@ public class User {
     )
     private List<Role> roles;
 
+    public User(String username, String password, String fullName, String email, String address, String sdt, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+        this.address = address;
+        this.sdt = sdt;
+        this.roles = roles;
+    }
 }

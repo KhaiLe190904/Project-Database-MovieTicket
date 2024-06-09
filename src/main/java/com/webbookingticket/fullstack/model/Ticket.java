@@ -23,19 +23,19 @@ public class Ticket {
     @Column(name="seat", nullable = false)
     private String seat;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="room_id", nullable = false)
     private Room room;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="schedule_id", nullable = false)
     private Schedule schedule;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="bill_id", nullable = false)
     private Bill bill;
 
