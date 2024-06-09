@@ -24,7 +24,7 @@ public class Bill{
     @Column(name="created_time", nullable = false)
     private LocalDateTime createdTime;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 

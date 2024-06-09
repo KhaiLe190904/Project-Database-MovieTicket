@@ -7,10 +7,12 @@ import com.webbookingticket.fullstack.service.MovieService;
 import com.webbookingticket.fullstack.service.MovieServiceImpl;
 import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("/movies")
 public class MovieController {
     private final MovieServiceImpl movieServiceImpl;
     private MovieService movieService;
@@ -79,8 +82,15 @@ public class MovieController {
     }
 
     @GetMapping("/delete")
-    public String deleteMovie(@RequestParam("movieId") int theId){
-        movieService.deleteById(theId);
+    public String deleteMovie(@RequestParam("movieId") int theId, RedirectAttributes redirectAttributes) {
+        try {
+            movieService.deleteById(theId);
+            redirectAttributes.addFlashAttribute("message", "Movie deleted successfully");
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Cannot delete movie, as it is referenced by schedules.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "An unexpected error occurred.");
+        }
         return "redirect:/movies/list";
     }
 
