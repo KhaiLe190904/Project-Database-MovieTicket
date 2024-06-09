@@ -62,7 +62,7 @@ document.getElementById("bookButton").addEventListener("click", () => {
   });
 
   if (selectedSeats.length > 0) {
-    fetch('/api/select-seat', {
+    fetch("https://jsonplaceholder.typicode.com/users", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

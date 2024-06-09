@@ -15,10 +15,6 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-<<<<<<< HEAD
-
-=======
->>>>>>> c9e6578d44356999fc33afe4e569f0c21fa4460f
 	</properties>
 	<dependencies>
 		<dependency>
@@ -82,12 +78,6 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<<<<<<< HEAD
-		<dependency>
-			<groupId>org.hibernate.orm</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>6.5.2.Final</version>
-=======
 		<!-- JSR 303 - Bean Validation API -->
 		<dependency>
 			<groupId>jakarta.validation</groupId>
@@ -100,7 +90,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>8.0.1.Final</version>
->>>>>>> c9e6578d44356999fc33afe4e569f0c21fa4460f
 		</dependency>
 	</dependencies>
 
