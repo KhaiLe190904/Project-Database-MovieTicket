@@ -15,19 +15,16 @@ for (let row = 0; row < rows.length; row++) {
   for (let col = 1; col <= cols; col++) {
     seatIndex++;
     let randint = Math.floor(Math.random() * 2);
-    let booked = randint === 1 ? "" : "";
+    let booked = randint === 1 ? "" : "booked";
     let disabled = booked === "booked" ? "disabled" : "";
     let seatLabel = generateSeatLabel(rows[row], col);
-    
+
     seats.insertAdjacentHTML(
       "beforeend",
-      '<input type="checkbox" name="tickets" id="s' +
-        seatIndex +
-        '" ' + disabled + ' /><label for="s' +
-        seatIndex +
-        '" class="seat ' +
-        booked +
-        '"><span>' + seatLabel + '</span></label>'
+      `<input type="checkbox" name="tickets" id="s${seatIndex}" data-seat-label="${seatLabel}" ${disabled} />
+      <label for="s${seatIndex}" class="seat ${booked}">
+        <span>${seatLabel}</span>
+      </label>`
     );
   }
 }
@@ -55,12 +52,38 @@ tickets.forEach((ticket) => {
   });
 });
 
-document.getElementById("bookButton").addEventListener("click", showPopup);
+// Add event listener to book button
+document.getElementById("bookButton").addEventListener("click", () => {
+  let selectedSeats = [];
+  tickets.forEach((ticket) => {
+    if (ticket.checked) {
+      selectedSeats.push(ticket.getAttribute("data-seat-label"));
+    }
+  });
 
-function showPopup() {
-  let popup = document.getElementById('popup');
-  popup.style.display = 'block';
-  setTimeout(function() {
-    window.location.href = '/';
-  }, 3000);
-}
+  if (selectedSeats.length > 0) {
+    fetch('/api/select-seat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ seats: selectedSeats })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        document.getElementById("popup").classList.add("show");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      } else {
+        alert("Booking failed: " + data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  } else {
+    alert("Please select at least one seat.");
+  }
+});
