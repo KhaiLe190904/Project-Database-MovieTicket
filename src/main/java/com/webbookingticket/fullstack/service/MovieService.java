@@ -8,7 +8,7 @@ import java.util.List;
 public interface MovieService {
     List<Movie> findAll();
     Movie findById(int theId);
-    Movie save(Movie theEmployee);
+    Movie save(Movie theMovie);
     void deleteById(int theId);
     public Movie findMovieByName(String name);
 }

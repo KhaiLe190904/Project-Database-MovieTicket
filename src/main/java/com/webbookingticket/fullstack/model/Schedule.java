@@ -19,7 +19,7 @@ public class Schedule{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    public int id;
+    private int id;
 
     @Column(name="start", nullable = false)
     private Date start;

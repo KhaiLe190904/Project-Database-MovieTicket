@@ -18,7 +18,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    public int id;
+    private int id;
 
     @Column(name="name", nullable = false)
     private String name;
@@ -67,6 +67,28 @@ public class Movie {
         updateAt = LocalDateTime.now();
     }
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "movie_category",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories;
+
+    public Movie(String name, String description, String director, String actors, String movieCategory, Date releaseDate, float duration, String trailerUrl, int isShowing, String posterUrl, List<Category> categories) {
+        this.name = name;
+        this.description = description;
+        this.director = director;
+        this.actors = actors;
+        this.movieCategory = movieCategory;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.trailerUrl = trailerUrl;
+        this.isShowing = isShowing;
+        this.posterUrl = posterUrl;
+        this.categories = categories;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -83,6 +105,7 @@ public class Movie {
                 ", posterUrl='" + posterUrl + '\'' +
                 ", updateAt=" + updateAt +
                 ", createAt=" + createAt +
+                ", categories=" + categories +
                 '}';
     }
 }

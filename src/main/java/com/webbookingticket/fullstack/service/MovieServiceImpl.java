@@ -1,7 +1,10 @@
 package com.webbookingticket.fullstack.service;
 
+import com.webbookingticket.fullstack.model.Category;
 import com.webbookingticket.fullstack.model.Movie;
+import com.webbookingticket.fullstack.model.Role;
 import com.webbookingticket.fullstack.model.Schedule;
+import com.webbookingticket.fullstack.repository.CategoryRepository;
 import com.webbookingticket.fullstack.repository.MovieRepository;
 import com.webbookingticket.fullstack.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,12 @@ public class MovieServiceImpl implements MovieService{
     private ScheduleRepository scheduleRepository;
 
     @Autowired
-    public MovieServiceImpl(MovieRepository theMovieRepository){
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    public MovieServiceImpl(MovieRepository theMovieRepository, CategoryRepository theCategoryRepository){
         movieRepository = theMovieRepository;
+        categoryRepository = theCategoryRepository;
     }
 
     @Override

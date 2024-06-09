@@ -1,37 +1,38 @@
 package com.webbookingticket.fullstack.model;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="roles")
-public class Role {
+@Table(name="categories")
+public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
-    @Column(name="role_name", unique = true, nullable = false)
+    @Column(name="name", unique=true)
     private String name;
 
     @ManyToMany
     @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            name = "movie_category",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private List<User> users;
+    private List<Movie> movies;
 
-    public Role(String name) {
+    public Category(String name) {
         this.name = name;
     }
 }
-

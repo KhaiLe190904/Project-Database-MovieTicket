@@ -15,7 +15,7 @@
 
     <p class="h4 mb-4">Save Movie</p>
 
-    <form action="#" th:action="@{/movies/save}"
+    <form id="container" action="#" th:action="@{/movies/save}"
           th:object="${movie}" method="POST">
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
@@ -31,21 +31,28 @@
 
         <input type="text" th:field="*{actors}"
                class="form-control mb-4 w-25" placeholder="Actors">
-
-        <input type="text" th:field="*{movieCategory}"
-               class="form-control mb-4 w-25" placeholder="Category">
+        <div style="text-align: center;">
+        <label for="addCategory" > Please choose the category </label>
+            <select id="addCategory" th:field="*{movieCategory}" class="form-control mb-4 w-25" style="margin: 0 auto;">
+                <option th:each="tempCategory : ${category}" th:value="${tempCategory}" th:text="${tempCategory}"/>
+            </select>
+        </div>
 
         <input type="date" th:field="*{releaseDate}"
                class="form-control mb-4 w-25" placeholder="Release Date">
-
-        <input type="text" th:field="*{duration}"
+        <div style="text-align: center;">
+        <label for="duration"> Enter the duration </label>
+        <input id="duration" type="text" th:field="*{duration}"
                class="form-control mb-4 w-25" placeholder="Duration" required>
-
+        </div>
         <input type="url" th:field="*{trailerUrl}"
                class="form-control mb-4 w-25" placeholder="Trailer URL" required>
 
         <!-- isShowing dang loi -->
-        <input type="text" th:field="*{isShowing}"
+
+        <div style="text-align: center;">
+        <label for="showing">The status of this movie?</label>
+        <input id="showing" type="text" th:field="*{isShowing}"
                class="form-control mb-4 w-25"
                placeholder="IS SHOWING?"
                pattern="[01]"
@@ -55,12 +62,12 @@
         <input type="url" th:field="*{posterUrl}"
                class="form-control mb-4 w-25" placeholder="Poster URL" required>
         <button type="submit" class="btn btn-dark col-1">SAVE</button>
+        </div>
     </form>
 
     <hr>
     <a th:href="@{/movies/list}">Back to Movie List</a>
 </div>
-
 </body>
 
 </html>

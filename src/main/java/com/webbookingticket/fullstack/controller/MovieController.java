@@ -1,12 +1,17 @@
 package com.webbookingticket.fullstack.controller;
 
 import com.webbookingticket.fullstack.dto.UserRegistrationDto;
+import com.webbookingticket.fullstack.model.Category;
 import com.webbookingticket.fullstack.model.Movie;
+import com.webbookingticket.fullstack.model.Schedule;
 import com.webbookingticket.fullstack.model.User;
+import com.webbookingticket.fullstack.repository.CategoryRepository;
+import com.webbookingticket.fullstack.repository.ScheduleRepository;
 import com.webbookingticket.fullstack.service.MovieService;
 import com.webbookingticket.fullstack.service.MovieServiceImpl;
 import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,10 +32,18 @@ public class MovieController {
     private MovieService movieService;
 
     @Autowired
-    public MovieController(MovieService theMovieService, MovieServiceImpl movieServiceImpl){
-        movieService = theMovieService;
+    private CategoryRepository categoryRepository;
+
+    @Value("${category}")
+    private List<String> category;
+
+    @Autowired
+    public MovieController(MovieService theMovieService, MovieServiceImpl movieServiceImpl, CategoryRepository categoryRepository) {
+        this.movieService = theMovieService;
         this.movieServiceImpl = movieServiceImpl;
+        this.categoryRepository = categoryRepository;
     }
+
 
     @ModelAttribute("user")
     public UserRegistrationDto getUserRegistrationDto() {
@@ -65,11 +79,18 @@ public class MovieController {
         // create model attribute to bind form data
         Movie theMovie = new Movie();
         theModel.addAttribute("movie", theMovie);
+        theModel.addAttribute("category", category);
         return "Admin/Movies/movie-form";
     }
 
     @PostMapping("/save")
     public String saveMovie(@ModelAttribute("movie") Movie theMovie){
+        Category movieCategory = categoryRepository.findByName(theMovie.getMovieCategory());
+        if (movieCategory != null) {
+            theMovie.setCategories(Arrays.asList(movieCategory));
+        } else {
+            throw new RuntimeException("Category not found");
+        }
         movieService.save(theMovie);
         return "redirect:/movies/list";
     }
@@ -78,6 +99,7 @@ public class MovieController {
     public String showFormForUpdate(@RequestParam("movieId") int theId, Model theModel){
         Movie theMovie = movieService.findById(theId);
         theModel.addAttribute("movie", theMovie);
+        theModel.addAttribute("category", category);
         return "Admin/Movies/movie-form";
     }
 
