@@ -1,12 +1,16 @@
 /* Custom CSS for Movie Directory page */
 .container {
-    margin-top: 150px;
-    margin-bottom: 200px;
-    padding: 20px;
-    scale: 1.2;
-    backface-visibility: inherit;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .container {
+        margin-top: 150px;
+        margin-bottom: 200px;
+        padding: 20px;
+        scale: 1.2;
+        backface-visibility: inherit;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* Set scale to 90% */
+        transform: scale(0.9);
+    }
 }
 
 .navbar {

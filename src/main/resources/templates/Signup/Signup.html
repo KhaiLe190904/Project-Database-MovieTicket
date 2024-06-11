@@ -16,6 +16,9 @@
         <div th:if="${param.success}" >
             <div class="alert alert-info">You've successfully registered</div>
         </div>
+        <div th:if="${error != null}">
+            <div class="alert alert-danger" th:text="${error}"></div>
+        </div>
         <form th:action="@{/signup}" method="post" th:object="${user}">
             <h1>Sign up</h1>
             <div class="inputbox">

@@ -15,7 +15,7 @@
 
     <p class="h4 mb-4">Save Movie</p>
 
-    <form id="container" action="#" th:action="@{/movies/save}"
+    <form id="container" action="#" th:action="@{/admin/movies/save}"
           th:object="${movie}" method="POST">
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
@@ -66,7 +66,7 @@
     </form>
 
     <hr>
-    <a th:href="@{/movies/list}">Back to Movie List</a>
+    <a th:href="@{/admin/movies/list}">Back to Movie List</a>
 </div>
 </body>
 

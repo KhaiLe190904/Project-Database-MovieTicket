@@ -10,19 +10,15 @@
 <body>
     <header>
         <nav>
-            <a href="../Navbar/Navbar.html" th:href="@{/}" >Home</a>
+            <a href="../Navbar/Navbar.html" th:href="@{/home}" >Home</a>
             <a href="">Contacts</a>
             <a href="">Info</a>
-            <div>
+            <a href="../Admin/Movies/movie-form.html" th:href="@{/admin/movies/list}" >ADMIN PAGE</a>
+            <div id="logout-btn">
                 <form action="#" th:action="@{/logout}" method="POST">
                     <input type="submit" value="Logout" />
                 </form>
             </div>
-
-            <!-- Add Sign In and Sign Up links for non-authenticated users -->
-<!--            <a href="../Signin/Signin.html" th:href="@{/signin}">Sign In</a>-->
-<!--            <a href="../Signup/Signup.html" th:href="@{/signup}">Sign Up</a>-->
-                <!-- Logout link (optional) -->
         </nav>
     </header>
     <!-- carousel -->

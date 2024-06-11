@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/schedules")
+@RequestMapping("/admin/schedules")
 @RequiredArgsConstructor
 public class ScheduleController {
 
