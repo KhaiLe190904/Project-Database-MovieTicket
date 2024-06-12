@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/movies")
+@RequestMapping("/admin/movies")
 public class MovieController {
     private final MovieServiceImpl movieServiceImpl;
     private MovieService movieService;
@@ -50,23 +50,10 @@ public class MovieController {
         return new UserRegistrationDto();
     }
 
-    @GetMapping("/home")
-    public String listMovieAtHome(Model theModel){
-        // get the movies from db
-        List<Movie> theMovies = movieService.findAll();
-        // filter the movies to include only those that are showing
-        List<Movie> showingMovies = theMovies.stream()
-                .filter(movie -> movie.getIsShowing() == 1)
-                .collect(Collectors.toList());
-        // add to the spring model
-        theModel.addAttribute("movies", showingMovies);
-        return "Navbar/Navbar";
-    }
 
     // add mapping for "/list"
     @GetMapping("/list")
     public String listMovie(Model theModel){
-
         // get the movies from db
         List<Movie> theMovies = movieService.findAll();
         // add to the spring model
@@ -84,7 +71,7 @@ public class MovieController {
     }
 
     @PostMapping("/save")
-    public String saveMovie(@ModelAttribute("movie") Movie theMovie){
+    public String saveMovie(@ModelAttribute("movie") Movie theMovie, RedirectAttributes redirectAttributes){
         Category movieCategory = categoryRepository.findByName(theMovie.getMovieCategory());
         if (movieCategory != null) {
             theMovie.setCategories(Arrays.asList(movieCategory));
@@ -92,7 +79,8 @@ public class MovieController {
             throw new RuntimeException("Category not found");
         }
         movieService.save(theMovie);
-        return "redirect:/movies/list";
+        redirectAttributes.addFlashAttribute("message", "Movie updated successfully");
+        return "redirect:/admin/movies/list";
     }
 
     @GetMapping("/showFormForUpdate")
@@ -113,7 +101,7 @@ public class MovieController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "An unexpected error occurred.");
         }
-        return "redirect:/movies/list";
+        return "redirect:/admin/movies/list";
     }
 
     @GetMapping("/list/{name}")

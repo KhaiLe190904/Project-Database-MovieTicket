@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Access Denied</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, rgb(58, 121, 76), rgb(168, 159, 142));
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            width: 420px;
+            border: 2px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(30px);
+            box-shadow: 0 0 10px rgba(0,0,0,.2);
+            background: transparent;
+            color: #fff;
+            border-radius: 10px;
+            padding: 30px 40px;
+        }
+        .wrapper h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .wrapper p {
+            text-align: center;
+        }
+        .wrapper a {
+            display: block;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        .wrapper a:hover {
+            background-color: #000000;
+        }
+        #return-to-home {
+            font-size: 20px;
+            color: #ffffff; /* You can change this color to suit your design */
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px; /* Adjust as needed */
+            border: 2px solid #ffffff; /* Add border for more visibility */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        #return-to-home a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        #return-to-home:hover {
+            background-color: #007bff;
+            color: #ffffff; /* Change text color on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <h1>Access Denied</h1>
+    <p>You do not have permission to access this page.</p>
+    <div id="return-to-home">
+        <a href="../../Navbar/Navbar.html" th:href="@{/home}">Return to Home</a>
+    </div>
+</div>
+</body>
+</html>

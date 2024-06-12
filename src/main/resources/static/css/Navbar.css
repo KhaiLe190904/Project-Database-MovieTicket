@@ -29,6 +29,24 @@ header a{
     padding: 50px 0;
     text-align: center;
 }
+#logout-btn {
+    position: fixed;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+}
+
+#logout-btn input[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#logout-btn input[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
 .movies {
     display: flex;
