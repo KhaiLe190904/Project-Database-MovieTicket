@@ -22,7 +22,7 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    @PostMapping("/save")
+    @PostMapping ("/save")
     @Operation(summary = "Luu 1 lich vao database",
                description = "123")
     public ResponseEntity<ScheduleDto> save(@RequestBody @Valid ScheduleDto scheduleDto) {
@@ -32,6 +32,11 @@ public class ScheduleController {
     @GetMapping("/list")
     public ResponseEntity<List<ScheduleDto>> getAllSchedules() {
         return ResponseEntity.ok(scheduleService.getAllSchedules());
+    }
+
+    @RequestMapping("")
+    public String Schedulelist() {
+        return "Admin/Schedules/schedule";
     }
 
 }
