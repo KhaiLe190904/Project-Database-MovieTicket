@@ -1,16 +1,15 @@
 /* Custom CSS for Movie Directory page */
+
 .container {
-    .container {
-        margin-top: 150px;
-        margin-bottom: 200px;
-        padding: 20px;
-        scale: 1.2;
-        backface-visibility: inherit;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        /* Set scale to 90% */
-        transform: scale(0.9);
-    }
+    margin-top: 150px;
+    margin-bottom: 200px;
+    padding: 20px;
+    scale: 1.2;
+    backface-visibility: inherit;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Set scale to 90% */
+    transform: scale(0.9);
 }
 
 .navbar {
@@ -40,14 +39,15 @@
 h2{
     text-align: center;
 }
-/* Style for the table */
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
+ /*Style for the table*/
+/*.table {*/
+/*    border-radius: 5px;*/
+/*    width: 100%;*/
+/*    margin-bottom: 1rem;*/
+/*    color: #212529;*/
+/*    table-layout: fixed;*/
+/*    border-collapse: collapse;*/
+/*}*/
 
 /* Style for table header */
 .table th,
