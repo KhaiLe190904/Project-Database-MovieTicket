@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/signup")
 public class AuthController {
-    private UserService userService;
-
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
+//    private UserService userService;
+//
+//    public AuthController(UserService userService) {
+//        this.userService = userService;
+//    }
 
     @ModelAttribute("user")
     public UserRegistrationDto getUserRegistrationDto() {
@@ -29,14 +29,14 @@ public class AuthController {
         return "Signup/Signup";
     }
 
-    @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto, Model model) {
-        try {
-            userService.save(registrationDto);
-        } catch (UserAlreadyExistsException e) {
-            model.addAttribute("error", e.getMessage());
-            return "Signup/Signup";
-        }
-        return "redirect:/signup?success";
-    }
+//    @PostMapping
+//    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto, Model model) {
+//        try {
+//            userService.save(registrationDto);
+//        } catch (UserAlreadyExistsException e) {
+//            model.addAttribute("error", e.getMessage());
+//            return "Signup/Signup";
+//        }
+//        return "redirect:/signup?success";
+//    }
 }
