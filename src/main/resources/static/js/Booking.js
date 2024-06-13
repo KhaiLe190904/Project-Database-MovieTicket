@@ -15,13 +15,13 @@ for (let row = 0; row < rows.length; row++) {
   for (let col = 1; col <= cols; col++) {
     seatIndex++;
     let randint = Math.floor(Math.random() * 2);
-    let booked = randint === 1 ? "" : "booked";
+    let booked = randint === 1 ? "" : "";
     let disabled = booked === "booked" ? "disabled" : "";
     let seatLabel = generateSeatLabel(rows[row], col);
 
     seats.insertAdjacentHTML(
-      "beforeend",
-      `<input type="checkbox" name="tickets" id="s${seatIndex}" data-seat-label="${seatLabel}" ${disabled} />
+        "beforeend",
+        `<input type="checkbox" name="tickets" id="s${seatIndex}" data-seat-label="${seatLabel}" ${disabled} />
       <label for="s${seatIndex}" class="seat ${booked}">
         <span>${seatLabel}</span>
       </label>`
@@ -42,10 +42,10 @@ tickets.forEach((ticket) => {
 
     if (ticket.checked) {
       count += 1;
-      amount += 200;
+      amount += 75000;
     } else {
       count -= 1;
-      amount -= 200;
+      amount -= 75000;
     }
     document.querySelector(".amount").innerHTML = amount;
     document.querySelector(".count").innerHTML = count;
@@ -60,30 +60,36 @@ document.getElementById("bookButton").addEventListener("click", () => {
       selectedSeats.push(ticket.getAttribute("data-seat-label"));
     }
   });
-
+  const data = {
+    seat_id: selectedSeats.join(","),
+    price: document.querySelector(".amount").innerHTML
+  }
   if (selectedSeats.length > 0) {
-    fetch("", {
+
+    fetch("https://jsonplaceholder.typicode.com/users", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ seats: selectedSeats })
+      body: JSON.stringify({data})
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        document.getElementById("popup").classList.add("show");
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 2000);
-      } else {
-        alert("Booking failed: " + data.message);
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById("popup").classList.add("show");
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 2000);
+          } else {
+            alert("Booking success: " + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
   } else {
     alert("Please select at least one seat.");
   }
+  console.log(data);
+
 });
