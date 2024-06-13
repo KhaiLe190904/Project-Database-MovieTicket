@@ -22,9 +22,10 @@ import java.util.Optional;
 public class ScheduleServiceImpl implements ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
-    public ScheduleRepository theScheduleRepository;
-    public RoomRepository theRoomRepository;
-    public MovieRepository theMovieRepository;
+    private final ScheduleRepository theScheduleRepository;
+    private final RoomRepository theRoomRepository;
+    private final MovieRepository theMovieRepository;
+
 
     private final ModelMapper modelMapper;
 
@@ -41,8 +42,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     private Schedule toEntity(ScheduleDto scheduleDto) {
-        Optional<Room> room = theRoomRepository.findById(scheduleDto.getRoom_id());
         Optional<Movie> movie = theMovieRepository.findById(scheduleDto.getMovie_id());
+        Optional<Room> room = theRoomRepository.findById(scheduleDto.getRoom_id());
         Schedule schedule = modelMapper.map(scheduleDto, Schedule.class);
         schedule.setRoom(room.orElse(null));
         schedule.setMovie(movie.orElse(null));
