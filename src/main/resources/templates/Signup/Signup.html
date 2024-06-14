@@ -13,8 +13,8 @@
     <th:block th:include="/header_on" th:if="${user.username}" ></th:block>
     <th:block th:include="/header_off" th:unless="${user.username}" ></th:block>
 </header>
-<br /><br /><br />
 <div class="signup">
+    <div clas="main-container">
     <div class="wrapper">
         <div th:if="${param.success}" >
             <div class="alert alert-info">You've successfully registered</div>
@@ -55,6 +55,7 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 </body>
 </html>
