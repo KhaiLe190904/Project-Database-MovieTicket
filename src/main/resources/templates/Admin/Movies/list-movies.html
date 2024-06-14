@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <title>Movie Directory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../../static/css/list-movies.css" th:href="@{/css/list-movies.css}">
 </head>
 <body>
 <header>
-    <nav class="navbar">
-        <a href="../../Navbar/Navbar.html" th:href="@{/home}">Home</a>
-        <a href="../../Contacts/Contacts.html">Contacts</a>
-        <a href="../../Info/Info.html">Info</a>
-    </nav>
+    <th:block th:insert="~{/header_on}" th:if="${user.username}"></th:block>
+    <th:block th:insert="~{/header_off}" th:unless="${user.username}"></th:block>
 </header>
 <!-- Success Message -->
 <div th:if="${message}" id="alert-popup" class="alert-popup show">
     <span th:text="${message}"></span>
 </div>
-
 <!-- Error Message -->
 <div th:if="${errorMessage}" id="alert-danger-popup" class="alert-popup danger show">
     <span th:text="${errorMessage}"></span>
 </div>
-<br><br>
 <div class="container">
     <h2>Movie Directory</h2>
     <hr>
+    <!-- Search Form -->
+    <form th:action="@{/admin/movies}" th:method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for movies..." name="keyword">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
     <!-- Add a button -->
     <a th:href="@{/admin/movies/showFormForAdd}"
        class="btn btn-primary btn-sm mb-3">
@@ -61,22 +62,22 @@
         <tbody>
         <tr th:each="tempMovie : ${movies}">
 
-            <td th:text="${tempMovie.name}" />
+            <td th:text="${tempMovie.name}"></td>
             <td>
-                <img th:src="${tempMovie.posterUrl}" alt="Error" width="75" height="100" >
+                <img th:src="${tempMovie.posterUrl}" alt="Error" width="75" height="100">
             </td>
             <td>
-                <a th:href="${tempMovie.trailerUrl}" text="Trailer" th:text="Trailer" />
+                <a th:href="${tempMovie.trailerUrl}" th:text="Trailer">Trailer</a>
             </td>
-            <td th:text="${tempMovie.movieCategory}" />
-            <td th:text="${tempMovie.isShowing}" />
+            <td th:text="${tempMovie.movieCategory}"></td>
+            <td th:text="${tempMovie.isShowing}"></td>
             <td th:text="${#dates.format(tempMovie.releaseDate, 'dd-MM-yyyy')}"></td>
-            <td th:text="${tempMovie.duration}" />
-            <td th:text="${tempMovie.description}" />
-            <td th:text="${tempMovie.director}" />
-            <td th:text="${tempMovie.actors}" />
-            <td th:text="${tempMovie.updateAt}" />
-            <td th:text="${tempMovie.createAt}" />
+            <td th:text="${tempMovie.duration}"></td>
+            <td th:text="${tempMovie.description}"></td>
+            <td th:text="${tempMovie.director}"></td>
+            <td th:text="${tempMovie.actors}"></td>
+            <td th:text="${tempMovie.updateAt}"></td>
+            <td th:text="${tempMovie.createAt}"></td>
             <td>
                 <a th:href="@{/admin/movies/showFormForUpdate(movieId=${tempMovie.id})}"
                    class="btn btn-info btn-sm">
@@ -92,6 +93,21 @@
         </tr>
         </tbody>
     </table>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/admin/movies/list(page=${currentPage - 1}, size=5)}">Previous</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
+                <a class="page-link" th:href="@{/admin/movies/list(page=${i}, size=5)}" th:text="${i + 1}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{/admin/movies/list(page=${currentPage + 1}, size=5)}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {

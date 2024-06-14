@@ -10,8 +10,8 @@
 </head>
 <body>
 <header>
-    <th:block th:include="/header_on" th:if="${user.username}" ></th:block>
-    <th:block th:include="/header_off" th:unless="${user.username}" ></th:block>
+    <th:block th:insert="~{/header_on}" th:if="${user.username}"></th:block>
+    <th:block th:insert="~{/header_off}" th:unless="${user.username}"></th:block>
 </header>
 <div class="signup">
     <div clas="main-container">
