@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="../../static/css/list-movies.css" th:href="@{/css/list-movies.css}">
 </head>
 <body>
+<div class="header">
 <header>
     <th:block th:insert="~{/header_on}" th:if="${user.username}"></th:block>
     <th:block th:insert="~{/header_off}" th:unless="${user.username}"></th:block>
 </header>
+</div>
 <!-- Success Message -->
 <div th:if="${message}" id="alert-popup" class="alert-popup show">
     <span th:text="${message}"></span>
