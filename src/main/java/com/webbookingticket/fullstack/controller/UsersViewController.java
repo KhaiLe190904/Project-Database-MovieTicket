@@ -1,51 +1,76 @@
 package com.webbookingticket.fullstack.controller;
 
-import com.webbookingticket.fullstack.model.Movie;
+import com.webbookingticket.fullstack.dto.MovieDto;
+import com.webbookingticket.fullstack.dto.UserDto;
 import com.webbookingticket.fullstack.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.webbookingticket.fullstack.service.ScheduleService;
+import com.webbookingticket.fullstack.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 // import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
+@AllArgsConstructor
+@SessionAttributes("user")
 public class UsersViewController {
     private MovieService movieService;
+    private ScheduleService scheduleService;
+    private UserService userService;
 
-    @Autowired
-    public UsersViewController(MovieService movieService) {
-        this.movieService = movieService;
+    @ModelAttribute("user")
+    public UserDto userRegistrationDto() {
+        return new UserDto();
     }
 
     @GetMapping({"/signin"})
-    public String checkSignIn(){
+    public String showSignInForm(){
         return "Signin/Signin";
+    }
+
+    @PostMapping("/signin")
+    public String Login(@ModelAttribute("user") UserDto userDto, Model model){
+        if(userService.checkUsernameUser(userDto.getUsername())==false){
+            return "redirect:/signin?usernamewrong";
+        }
+        if(userService.checkPasswordUser(userDto.getUsername(),userDto.getPassword())){
+            return "redirect:/signin?success";
+        }
+        return "redirect:/signin?passwordwrong";
     }
 
     @GetMapping("/home")
     public String listMovieAtHome(Model theModel){
-        // get the movies from db
-        List<Movie> theMovies = movieService.findAll();
-        // filter the movies to include only those that are showing
-        List<Movie> showingMovies = theMovies.stream()
-                .filter(movie -> movie.getIsShowing() == 1)
-                .collect(Collectors.toList());
-        // add to the spring model
-        theModel.addAttribute("movies", showingMovies);
         return "Navbar/Navbar";
     }
 
-    @GetMapping("/booking")
-    public String checkBooking(){
+    @GetMapping("/booking/{movie_id}")
+    public String Booking(@PathVariable Long movie_id, Model theModel) {
         return "Booking/Booking";
+    }
+
+    @GetMapping("/movies_list")
+    public ResponseEntity<List<MovieDto>> getAllMovies(){
+        return ResponseEntity.ok(movieService.getAll());
     }
 
     @GetMapping("/access-denied")
     public String showAccessDenied() {
         return "Admin/access-denied";
+    }
+
+    @GetMapping("/logout")
+    public String Logout(@ModelAttribute("user") UserDto userDto, WebRequest request, SessionStatus status){
+        // xóa session user ra khoi vi tri
+        status.setComplete(); // da hoan thanh
+        request.removeAttribute("user", WebRequest.SCOPE_SESSION); // thuc hien xoa user ra khoi tam cua session
+        return "redirect:/signin?logout";
     }
 }

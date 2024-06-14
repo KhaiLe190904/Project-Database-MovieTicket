@@ -1,8 +1,11 @@
 package com.webbookingticket.fullstack.service;
 
-import com.webbookingticket.fullstack.dto.UserRegistrationDto;
+import com.webbookingticket.fullstack.dto.UserDto;
 import com.webbookingticket.fullstack.model.User;
 
 public interface UserService {
-    User save(UserRegistrationDto registrationDto);
+    User save(UserDto registrationDto);
+    Boolean checkPasswordUser(String username, String password);
+    Boolean checkUsernameUser(String username);
+    User getUserByUsername(String username);
 }

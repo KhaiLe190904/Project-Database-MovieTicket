@@ -1,12 +1,13 @@
 package com.webbookingticket.fullstack.service;
 
-import com.webbookingticket.fullstack.model.Category;
-import com.webbookingticket.fullstack.model.Movie;
-import com.webbookingticket.fullstack.model.Role;
-import com.webbookingticket.fullstack.model.Schedule;
+import com.webbookingticket.fullstack.dto.MovieDto;
+import com.webbookingticket.fullstack.dto.ScheduleDto;
+import com.webbookingticket.fullstack.model.*;
 import com.webbookingticket.fullstack.repository.CategoryRepository;
 import com.webbookingticket.fullstack.repository.MovieRepository;
 import com.webbookingticket.fullstack.repository.ScheduleRepository;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -15,21 +16,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService{
 
-    private MovieRepository movieRepository;
+    private final ModelMapper modelMapper;
+
+    private final MovieRepository movieRepository;
 
     @Autowired
     private ScheduleRepository scheduleRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
-
-    @Autowired
-    public MovieServiceImpl(MovieRepository theMovieRepository, CategoryRepository theCategoryRepository){
-        movieRepository = theMovieRepository;
-        categoryRepository = theCategoryRepository;
-    }
 
     @Override
     public List<Movie> findAll() {
@@ -68,4 +66,27 @@ public class MovieServiceImpl implements MovieService{
     public Movie findMovieByName(String name) {
         return movieRepository.findMovieByName(name);
     }
+
+    @Override
+    public MovieDto getMovieDtoById(int movieId) {
+        return null;
+    }
+
+    @Override
+    public List<MovieDto> getAll() {
+        List<Movie> movies = movieRepository.findAll();
+        return movies.stream().map(this::toDto).toList();
+    }
+
+    private Movie toEntity(MovieDto movieDto) {
+        Movie movie = modelMapper.map(movieDto, Movie.class);
+        return movie;
+    }
+
+    private MovieDto toDto(Movie movie) {
+        MovieDto movieDto = modelMapper.map(movie, MovieDto.class);
+        return movieDto;
+    }
+
+
 }

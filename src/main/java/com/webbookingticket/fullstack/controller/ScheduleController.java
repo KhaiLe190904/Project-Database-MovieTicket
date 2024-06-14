@@ -27,10 +27,10 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleService.save(scheduleDto));
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<ScheduleDto>> getAllSchedules() {
-        return ResponseEntity.ok(scheduleService.getAllSchedules());
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<List<ScheduleDto>> getScheduleByMovieId() {
+//        return ResponseEntity.ok(scheduleService.getScheduleByMovieId());
+//    }
 
     @RequestMapping("")
     public String scheduleList() {

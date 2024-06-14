@@ -1,15 +1,11 @@
 package com.webbookingticket.fullstack.controller;
 
-import com.webbookingticket.fullstack.dto.UserRegistrationDto;
+import com.webbookingticket.fullstack.dto.UserDto;
 import com.webbookingticket.fullstack.model.Category;
 import com.webbookingticket.fullstack.model.Movie;
-import com.webbookingticket.fullstack.model.Schedule;
-import com.webbookingticket.fullstack.model.User;
 import com.webbookingticket.fullstack.repository.CategoryRepository;
-import com.webbookingticket.fullstack.repository.ScheduleRepository;
 import com.webbookingticket.fullstack.service.MovieService;
 import com.webbookingticket.fullstack.service.MovieServiceImpl;
-import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,11 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/movies")
@@ -45,8 +38,8 @@ public class MovieController {
 
 
     @ModelAttribute("user")
-    public UserRegistrationDto getUserRegistrationDto() {
-        return new UserRegistrationDto();
+    public UserDto getUserRegistrationDto() {
+        return new UserDto();
     }
 
 

@@ -25,11 +25,11 @@ public class Ticket {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", nullable = false)
-    private User user;
+    private User user_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="schedule_id", nullable = false)
-    private Schedule schedule;
+    private Schedule schedule_id;
 
     @Column(name="price", nullable = false)
     private BigDecimal price;

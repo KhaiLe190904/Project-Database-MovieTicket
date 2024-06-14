@@ -1,8 +1,8 @@
 package com.webbookingticket.fullstack.controller;
 
-import com.webbookingticket.fullstack.config.UserAlreadyExistsException;
-import com.webbookingticket.fullstack.dto.UserRegistrationDto;
+import com.webbookingticket.fullstack.dto.UserDto;
 import com.webbookingticket.fullstack.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,17 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/signup")
 public class AuthController {
-//    private UserService userService;
-//
-//    public AuthController(UserService userService) {
-//        this.userService = userService;
-//    }
+    private UserService userService;
 
     @ModelAttribute("user")
-    public UserRegistrationDto getUserRegistrationDto() {
-        return new UserRegistrationDto();
+    public UserDto getUserRegistrationDto() {
+        return new UserDto();
     }
 
     @GetMapping
@@ -29,14 +26,12 @@ public class AuthController {
         return "Signup/Signup";
     }
 
-//    @PostMapping
-//    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto, Model model) {
-//        try {
-//            userService.save(registrationDto);
-//        } catch (UserAlreadyExistsException e) {
-//            model.addAttribute("error", e.getMessage());
-//            return "Signup/Signup";
-//        }
-//        return "redirect:/signup?success";
-//    }
+    @PostMapping
+    public String registerUserAccount(@ModelAttribute("user") UserDto registrationDto, Model model) {
+        if (userService.checkUsernameUser(registrationDto.getUsername())) {
+            return "redirect:/signup?username_exist";
+        }
+        userService.save(registrationDto);
+        return "redirect:/signup?success";
+    }
 }

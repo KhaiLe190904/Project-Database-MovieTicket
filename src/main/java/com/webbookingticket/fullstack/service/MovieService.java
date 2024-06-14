@@ -1,5 +1,6 @@
 package com.webbookingticket.fullstack.service;
 
+import com.webbookingticket.fullstack.dto.MovieDto;
 import com.webbookingticket.fullstack.model.Movie;
 import org.springframework.data.repository.query.Param;
 
@@ -11,4 +12,6 @@ public interface MovieService {
     Movie save(Movie theMovie);
     void deleteById(int theId);
     public Movie findMovieByName(String name);
+    MovieDto getMovieDtoById(int movieId);
+    List<MovieDto> getAll();
 }

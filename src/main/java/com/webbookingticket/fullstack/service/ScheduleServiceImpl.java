@@ -37,8 +37,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleDto> getAllSchedules() {
-        return scheduleRepository.findAll().stream().map(this::toDto).toList();
+    public List<Schedule> getScheduleByMovieId(int movieId) {
+        return scheduleRepository.findByMovieId(movieId);
     }
 
     private Schedule toEntity(ScheduleDto scheduleDto) {

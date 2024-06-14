@@ -153,3 +153,30 @@ h2{
 .alert-popup.hide {
     animation: slideUp 0.5s forwards;
 }
+
+.alert-popup, .alert-popup.danger {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-popup.show {
+    display: block;
+}
+.alert-popup.hide {
+    display: none;
+}
+.alert-popup {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+.alert-popup.danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

@@ -17,12 +17,12 @@
     </nav>
 </header>
 <!-- Success Message -->
-<div th:if="${message}" id="alert-popup" class="alert-popup">
+<div th:if="${message}" id="alert-popup" class="alert-popup show">
     <span th:text="${message}"></span>
 </div>
 
 <!-- Error Message -->
-<div th:if="${errorMessage}" id="alert-danger-popup" class="alert-popup danger">
+<div th:if="${errorMessage}" id="alert-danger-popup" class="alert-popup danger show">
     <span th:text="${errorMessage}"></span>
 </div>
 <br><br>
