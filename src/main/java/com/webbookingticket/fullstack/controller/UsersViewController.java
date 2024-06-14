@@ -41,7 +41,8 @@ public class UsersViewController {
             return "redirect:/signin?usernamewrong";
         }
         if(userService.checkPasswordUser(userDto.getUsername(),userDto.getPassword())){
-            return "redirect:/signin?success";
+            int id = userService.getUserByUsername(userDto.getUsername()).getId();
+            return "redirect:/signin?success=" + id;
         }
         return "redirect:/signin?passwordwrong";
     }

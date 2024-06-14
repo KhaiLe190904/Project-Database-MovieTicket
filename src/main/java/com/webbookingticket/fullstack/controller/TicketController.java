@@ -15,15 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/tickets")
 @RequiredArgsConstructor
-@SessionAttributes("user")
 public class TicketController {
 
     private UserService userService;
-
-    @ModelAttribute("user")
-    public UserDto userDto() {
-        return new UserDto();
-    }
 
     private final TicketService ticketService;
     @PostMapping("/post")

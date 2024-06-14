@@ -26,4 +26,5 @@ public class ScheduleDto {
     private int movie_id;
 
     private int room_id;
+
 }

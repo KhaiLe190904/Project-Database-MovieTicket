@@ -16,7 +16,13 @@
     <div class="main-container">
         <div class="wrapper">
             <div th:if="${param.success}">
+                <script>
+                    window.location.href = '/home';
+                    const param = new URLSearchParams(window.location.search);
+                    localStorage.setItem("userId", JSON.stringify(param.get('success')));
+                </script>
                 <div class="alert alert-success col-xs-offset-1 col-xs-10">You are login</div>
+
             </div>
             <div th:if="${param.logout}">
                 <div class="alert alert-success col-xs-offset-1 col-xs-10"> You have been logged out.</div>

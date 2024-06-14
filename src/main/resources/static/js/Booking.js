@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let seats = document.querySelector(".all-seats");
 
   // Rows from A to F and columns from 1 to 10
-  const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const rows = ['F', 'E', 'D', 'C', 'B', 'A'];
   const cols = 10;
 
   // Function to generate seat labels
@@ -67,10 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Get selected scheduleID
     const selectedScheduleID = document.querySelector('input[name="time"]:checked').getAttribute("data-schedule-id");
+    const id = JSON.parse(localStorage.getItem("userId"));
 
     const data = {
       seat_id: selectedSeats.join(","),
       price: 75000,
+      user_id: id,
       schedule_id: selectedScheduleID
     };
 
@@ -123,6 +125,7 @@ async function fetchSchedules(movieId) {
     console.error('Lỗi khi lấy lịch chiếu:', error);
   }
 }
+
 
 // Function to display schedules
 function displaySchedules(schedules) {
