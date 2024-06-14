@@ -2,20 +2,28 @@ package com.webbookingticket.fullstack.controller;
 
 
 import com.webbookingticket.fullstack.dto.TicketDto;
+import com.webbookingticket.fullstack.dto.UserDto;
 import com.webbookingticket.fullstack.service.TicketService;
+import com.webbookingticket.fullstack.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/tickets")
 @RequiredArgsConstructor
+@SessionAttributes("user")
 public class TicketController {
+
+    private UserService userService;
+
+    @ModelAttribute("user")
+    public UserDto userDto() {
+        return new UserDto();
+    }
 
     private final TicketService ticketService;
     @PostMapping("/post")

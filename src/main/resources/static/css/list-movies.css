@@ -11,7 +11,9 @@
     /* Set scale to 90% */
     transform: scale(0.9);
 }
-
+header{
+    background: linear-gradient(to right, rgb(58, 121, 76), rgb(168, 159, 142));
+}
 .navbar {
     display: flex;
     justify-content: space-around;

@@ -29,9 +29,9 @@ header a{
 }
 
 #logout-btn input[type="submit"] {
-    background-color: rgb(168, 159, 142);
+    background-color: rgb(106, 163, 81);
     color: #ffffff;
-    border: none;
+    border: 1px;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;

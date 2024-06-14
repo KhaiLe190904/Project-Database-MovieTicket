@@ -6,9 +6,12 @@ import com.webbookingticket.fullstack.model.Movie;
 import com.webbookingticket.fullstack.repository.CategoryRepository;
 import com.webbookingticket.fullstack.service.MovieService;
 import com.webbookingticket.fullstack.service.MovieServiceImpl;
+import com.webbookingticket.fullstack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +22,19 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/movies")
+@SessionAttributes("user")
 public class MovieController {
     private final MovieServiceImpl movieServiceImpl;
     private MovieService movieService;
+    private UserService userService;
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @ModelAttribute("user")
+    public UserDto getUserDto() {
+        return new UserDto();
+    }
 
     @Value("${category}")
     private List<String> category;
@@ -36,20 +46,29 @@ public class MovieController {
         this.categoryRepository = categoryRepository;
     }
 
+    // TIM KIEM
+    @GetMapping
+    public String listMovies(Model model, @RequestParam(name = "keyword", required = false) String keyword) {
 
-    @ModelAttribute("user")
-    public UserDto getUserRegistrationDto() {
-        return new UserDto();
+        List<Movie> movies;
+
+        if (keyword != null && !keyword.isEmpty()) {
+            movies = movieService.findByNameOrDescriptionOrCategory(keyword);
+        } else {
+            movies = movieService.findAll();
+        }
+
+        model.addAttribute("movies", movies);
+        return "Admin/Movies/find-movie";
     }
-
 
     // add mapping for "/list"
     @GetMapping("/list")
-    public String listMovie(Model theModel){
-        // get the movies from db
-        List<Movie> theMovies = movieService.findAll();
-        // add to the spring model
-        theModel.addAttribute("movies", theMovies);
+    public String listMovie(Model theModel, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        Page<Movie> moviePage = movieService.findPaginated(PageRequest.of(page, size));
+        theModel.addAttribute("movies", moviePage.getContent());
+        theModel.addAttribute("currentPage", page);
+        theModel.addAttribute("totalPages", moviePage.getTotalPages());
         return "Admin/Movies/list-movies";
     }
 

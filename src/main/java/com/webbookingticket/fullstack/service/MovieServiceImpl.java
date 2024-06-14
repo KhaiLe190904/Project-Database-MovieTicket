@@ -1,7 +1,6 @@
 package com.webbookingticket.fullstack.service;
 
 import com.webbookingticket.fullstack.dto.MovieDto;
-import com.webbookingticket.fullstack.dto.ScheduleDto;
 import com.webbookingticket.fullstack.model.*;
 import com.webbookingticket.fullstack.repository.CategoryRepository;
 import com.webbookingticket.fullstack.repository.MovieRepository;
@@ -10,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,16 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public List<Movie> findAll() {
         return movieRepository.findAll();
+    }
+
+    @Override
+    public List<Movie> findByNameOrDescriptionOrCategory(String keyword) {
+        return movieRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrMovieCategoryContainingIgnoreCase(keyword, keyword, keyword);
+    }
+
+    @Override
+    public Page<Movie> findPaginated(PageRequest pageRequest) {
+        return movieRepository.findAll(pageRequest);
     }
 
     @Override

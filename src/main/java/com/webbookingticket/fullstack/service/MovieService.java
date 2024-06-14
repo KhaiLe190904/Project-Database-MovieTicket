@@ -2,7 +2,8 @@ package com.webbookingticket.fullstack.service;
 
 import com.webbookingticket.fullstack.dto.MovieDto;
 import com.webbookingticket.fullstack.model.Movie;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface MovieService {
     public Movie findMovieByName(String name);
     MovieDto getMovieDtoById(int movieId);
     List<MovieDto> getAll();
+    Page<Movie> findPaginated(PageRequest pageRequest);
+    List<Movie> findByNameOrDescriptionOrCategory(String keyword);
 }
