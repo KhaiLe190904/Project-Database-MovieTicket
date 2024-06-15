@@ -62,15 +62,19 @@ public class MovieController {
         return "Admin/Movies/find-movie";
     }
 
-    // add mapping for "/list"
     @GetMapping("/list")
-    public String listMovie(Model theModel, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    public String listMovie(@ModelAttribute("user") UserDto userDto, Model theModel, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        if (userDto.getUsername() == null) {
+            return "redirect:/access-denied";
+        }
         Page<Movie> moviePage = movieService.findPaginated(PageRequest.of(page, size));
         theModel.addAttribute("movies", moviePage.getContent());
         theModel.addAttribute("currentPage", page);
         theModel.addAttribute("totalPages", moviePage.getTotalPages());
         return "Admin/Movies/list-movies";
     }
+
+
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel){
@@ -115,9 +119,4 @@ public class MovieController {
         return "redirect:/admin/movies/list";
     }
 
-    @GetMapping("/list/{name}")
-    public Movie findMovieName(@PathVariable String name){
-        Movie theMovie = movieService.findMovieByName(name);
-        return theMovie;
-    }
 }

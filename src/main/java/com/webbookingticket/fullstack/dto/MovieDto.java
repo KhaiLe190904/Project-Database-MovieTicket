@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MovieDto {
+
     private int movieId;
     private String movieName;
     private String trailerUrl;

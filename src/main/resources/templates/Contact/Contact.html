@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="../../static/css/Contact.css" th:href="@{/css/Contact.css}">
+</head>
+<body>
+<header>
+    <th:block th:insert="~{/header_on}" th:if="${user.username}"></th:block>
+    <th:block th:insert="~{/header_off}" th:unless="${user.username}"></th:block>
+</header>
+<div class="container">
+    <main class="contact-page">
+        <h1>Liên Hệ</h1>
+        <div class="contact-content">
+            <section>
+                <h2>Leader</h2>
+                <h3>Lê Quang Khải</h3>
+                <p><a href="">Github</a></p>
+                <p><a href="https://www.facebook.com/khaile">Facebook</a></p>
+                <p><a href="mailto:khai.lq22567@sis.hust.edu.vn">Email</a></p>
+            </section>
+            <section>
+                <h2>Front-end</h2>
+                <h3>Đặng Quang Huy</h3>
+                <p><a href="">Github</a></p>
+                <p><a href="https://www.facebook.com/huydq.uit">Facebook</a></p>
+                <p><a href="mailto:huy.dq228742@sis.hust.edu.vn">Email</a></p>
+                <h3>Phạm Quốc Minh</h3>
+                <p><a href="">Github</a></p>
+                <p><a href="https://www.facebook.com/minhpham.uit">Facebook</a></p>
+                <p><a href="mailto:">Email</a></p>
+            </section>
+            <section>
+                <h2>DATABASE</h2>
+                <h3>Trịnh Hữu An</h3>
+                <p><a href="">Github</a></p>
+                <p><a href="https://www.facebook.com/anh.trinh.uit">Facebook</a></p>
+                <p><a href="mailto:">Email</a></p>
+            </section>
+        </div>
+    </main>
+</div>
+<footer>
+    <p>&copy; 2024 CSDL 2023.2 - All rights reserved.</p>
+</footer>
+</body>
+</html>

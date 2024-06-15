@@ -12,11 +12,11 @@ let timeRunning = 3000;
 let timeAutoNext = 7000;
 
 nextDom.onclick = function(){
-    showSlider('next');    
+    showSlider('next');
 }
 
 prevDom.onclick = function(){
-    showSlider('prev');    
+    showSlider('prev');
 }
 let runTimeOut;
 let runNextAuto = setTimeout(() => {
@@ -26,7 +26,7 @@ let runNextAuto = setTimeout(() => {
 function showSlider(type){
     let  SliderItemsDom = SliderDom.querySelectorAll('.carousel .list .item');
     let thumbnailItemsDom = document.querySelectorAll('.carousel .thumbnail .item');
-    
+
     if(type === 'next'){
         SliderDom.appendChild(SliderItemsDom[0]);
         thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);

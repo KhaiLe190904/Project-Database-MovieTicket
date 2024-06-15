@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+    <link rel="stylesheet" href="../../static/css/Info.css" th:href="@{/css/Info.css}">
+</head>
+<body>
+    <header>
+        <th:block th:insert="~{/header_on}" th:if="${user.username}"></th:block>
+        <th:block th:insert="~{/header_off}" th:unless="${user.username}"></th:block>
+    </header>
+    <div class="container">
+        <main class="info-page">
+            <h1>Information</h1>
+            <div class="info-content">
+                <section>
+                    <h2>WEBSITE bán vé xem phim</h2>
+                </section>
+                <section>
+                    <h2>Hướng dẫn sử dụng</h2>
+                    <h3>Đăng nhập</h3>
+                    <p>Để đăng nhập, bạn cần có tài khoản. Nếu chưa có, hãy đăng ký tài khoản trước.</p>
+                    <h3>Đăng ký</h3>
+                    <p>Để đăng ký, bạn cần điền đầy đủ thông tin vào form đăng ký. Sau khi đăng ký, bạn sẽ được chuyển đến trang đăng nhập.</p>
+                    <h3>Đặt vé</h3>
+                    <p>Để đặt vé, bạn cần chọn phim, rạp, ngày, suất chiếu và chỗ ngồi. Sau khi chọn xong, bạn sẽ được chuyển đến trang thanh toán và nhận vé điện tử.</p>
+                </section>
+                <section>
+                    <h2>Liên hệ</h2>
+                    <p>Với mọi vấn đề có thể liên hệ qua trang <a href="../Contact/Contact.html" th:href="@{/contact}">Contact</a>.</p>
+                </section>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2024 CSDL 2023.2 - All rights reserved.</p>
+    </footer>
+</body>
+</html>
