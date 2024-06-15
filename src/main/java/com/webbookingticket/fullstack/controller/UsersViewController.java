@@ -52,10 +52,24 @@ public class UsersViewController {
         return "Navbar/Navbar";
     }
 
+    @GetMapping("/info")
+    public String showInfo(){
+        return "Info/Info";
+    }
+
+    @GetMapping("/contact")
+    public String showContact(){
+        return "Contact/Contact";
+    }
+
     @GetMapping("/booking/{movie_id}")
-    public String Booking(@PathVariable Long movie_id, Model theModel) {
+    public String Booking(@ModelAttribute("user") UserDto userDto,@PathVariable Long movie_id, Model theModel) {
+        if (userDto.getUsername() == null) {
+            return "redirect:/signin";
+        }
         return "Booking/Booking";
     }
+
 
     @GetMapping("/movies_list")
     public ResponseEntity<List<MovieDto>> getAllMovies(){
