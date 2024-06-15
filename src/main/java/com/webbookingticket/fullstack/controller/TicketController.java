@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/tickets")
 @RequiredArgsConstructor
@@ -20,11 +22,12 @@ public class TicketController {
     private UserService userService;
 
     private final TicketService ticketService;
+
     @PostMapping("/post")
     @Operation(summary = "Luu 1 ve vao database",
             description = "")
     public ResponseEntity<TicketDto> save(@RequestBody @Valid TicketDto ticketDto) {
-       return  ResponseEntity.ok(ticketService.save(ticketDto));
+       return ResponseEntity.ok(ticketService.save(ticketDto));
     }
 
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ScheduleServiceImpl implements ScheduleService {
+public class  ScheduleServiceImpl implements ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
     private final ScheduleRepository theScheduleRepository;
@@ -49,6 +49,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         schedule.setMovie(movie.orElse(null));
         return schedule;
     }
+
     private ScheduleDto toDto(Schedule schedule) {
         int roomId = schedule.getRoom().getId();
         int movieId = schedule.getMovie().getId();

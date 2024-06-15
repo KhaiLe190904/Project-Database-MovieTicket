@@ -18,18 +18,18 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Integer id;
 
     @Column(name="seat", nullable = false)
     private String seat;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", nullable = false)
-    private User user_id;
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="schedule_id", nullable = false)
-    private Schedule schedule_id;
+    private Schedule schedule;
 
     @Column(name="price", nullable = false)
     private BigDecimal price;

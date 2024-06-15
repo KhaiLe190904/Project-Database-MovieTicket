@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,22 +29,30 @@ public class TicketServiceImpl  implements TicketService {
         return toDto(ticket);
     }
 
+    @Override
+    public List<String> getBookedSeatLabels(Long scheduleId) {
+        // Implement this method to fetch booked seat labels from the database
+        return ticketRepository.findBookedSeatLabelsByScheduleId(scheduleId);
+    }
+
+
     private Ticket toEntity(TicketDto ticketDto) {
         Optional<Schedule> schedule = scheduleRepository.findById(ticketDto.getScheduleId());
         Optional<User> user = userRepository.findById(ticketDto.getUserId());
         Ticket ticket = modelMapper.map(ticketDto, Ticket.class);
-        ticket.setUser_id(user.orElse(null));
-        ticket.setSchedule_id(schedule.orElse(null));
-        ticketRepository.save(ticket);
+        ticket.setUser(user.orElse(null));
+        ticket.setSchedule(schedule.orElse(null));
+        ticket.setId(null);
         return ticket;
     }
 
     private TicketDto toDto(Ticket ticket) {
-        int user_id = ticket.getUser_id().getId();
-        int schedule_id = ticket.getSchedule_id().getId();
+        int user_id = ticket.getUser().getId();
+        int schedule_id = ticket.getSchedule().getId();
         TicketDto ticketDTO = modelMapper.map(ticket, TicketDto.class);
         ticketDTO.setUserId(user_id);
         ticketDTO.setScheduleId(schedule_id);
         return ticketDTO;
     }
+
 }
