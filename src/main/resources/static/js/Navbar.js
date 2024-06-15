@@ -75,11 +75,11 @@ function displayMovies(movies) {
         const poster = document.createElement('img');
         poster.src = movie.posterUrl;
         poster.alt = 'Movie Poster';
-        poster.width = 215;
-        poster.height = 304;
+        poster.width = 133;
+        poster.height = 200;
 
         const title = document.createElement('h3');
-        title.textContent = movie.name;
+        title.textContent = movie.movieName;
 
         const buttonsDiv = document.createElement('div');
         buttonsDiv.className = 'buttons';

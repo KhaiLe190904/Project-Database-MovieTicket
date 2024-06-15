@@ -28,7 +28,7 @@ public class BookingController {
     private TicketService ticketService;
 
     @PostMapping("/{movieId}")
-    public ResponseEntity<List<Schedule>> getScheduleByMovieId(@PathVariable int movieId) {
+    public ResponseEntity<List<Schedule>> getScheduleByMovieId(@PathVariable int movieId, @ModelAttribute("user") UserDto user) {
         List<Schedule> schedules = scheduleService.getScheduleByMovieId(movieId);
         if (schedules != null && !schedules.isEmpty()) {
             return new ResponseEntity<>(schedules, HttpStatus.OK);

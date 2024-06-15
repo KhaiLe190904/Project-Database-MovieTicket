@@ -12,11 +12,20 @@
   <link rel="stylesheet" href="../../static/css/Booking.css" th:href="@{/css/Booking.css}">
 </head>
 <body>
+<div class="modal" id="myModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="modalMessage"></p>
+  </div>
+</div>
+
 <div class="center">
   <div class="tickets">
     <div class="ticket-selector">
       <div class="head">
-        <div class="title">Movie Name</div> <!-- Movie Name -->
+        <a id="homebutton" href="../Navbar/Navbar.html" th:href="@{/home}">Home</a>
+        <div class="title">Movie Name</div>
+        <!-- Movie Name -->
       </div>
       <div class="seats">
         <div class="status">

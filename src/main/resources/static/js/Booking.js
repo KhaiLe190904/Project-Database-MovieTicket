@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         seats.insertAdjacentHTML(
             "beforeend",
             `<input type="checkbox" name="tickets" id="s${seatIndex}" data-seat-label="${seatLabel}" ${disabled} />
-                   <label for="s${seatIndex}" class="seat ${booked}">
-                     <span>${seatLabel}</span>
-                   </label>`
+           <label for="s${seatIndex}" class="seat ${booked}">
+             <span>${seatLabel}</span>
+           </label>`
         );
       }
     }
@@ -56,72 +56,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tickets.forEach((ticket) => {
       ticket.addEventListener("change", () => {
-        let amount = document.querySelector(".amount").innerHTML;
-        let count = document.querySelector(".count").innerHTML;
-        amount = Number(amount);
-        count = Number(count);
-
-        if (ticket.checked) {
-          count += 1;
-          amount += 75000;
-        } else {
-          count -= 1;
-          amount -= 75000;
-        }
-        document.querySelector(".amount").innerHTML = amount;
-        document.querySelector(".count").innerHTML = count;
+        updateTotalAmountAndCount();
       });
     });
 
     document.getElementById("bookButton").addEventListener("click", async () => {
-      let selectedSeats = [];
-      tickets.forEach((ticket) => {
-        if (ticket.checked) {
-          selectedSeats.push(ticket.getAttribute("data-seat-label"));
-        }
-      });
+      const selectedSeats = Array.from(tickets)
+          .filter(ticket => ticket.checked)
+          .map(ticket => ticket.getAttribute("data-seat-label"));
 
       const selectedScheduleID = document.querySelector('input[name="time"]:checked').getAttribute("data-schedule-id");
-      const id = JSON.parse(localStorage.getItem("userId"));
+      const userId = JSON.parse(localStorage.getItem("userId"));
 
       if (selectedSeats.length > 0) {
-        const book = (data) => {
-          fetch("http://localhost:8080/tickets/post", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          })
-              .then(response => response.json())
-              .then(data => {
-                if (data.success) {
-                  document.getElementById("popup").classList.add("show");
-                  setTimeout(() => {
-                    window.location.href = "/";
-                  }, 2000);
-                } else {
-                  console.error("Booking failed:", data.message);
-                }
-              })
-              .catch(error => {
-                console.error('Error:', error);
-              });
-        };
-
-        selectedSeats.forEach((seat) => {
+        const bookingPromises = selectedSeats.map(seat => {
           const data = {
             seat: seat,
-            userId: id,
+            userId: userId,
             scheduleId: selectedScheduleID,
             price: 75000,
           };
-          book(data);
+          return book(data);
         });
-      } else {
-        alert("Please select at least one seat.");
+
+        try {
+          await Promise.all(bookingPromises);
+          // All bookings succeeded
+          const totalAmount = document.querySelector(".amount").innerHTML;
+          const bookedSeatsMessage = selectedSeats.join(', ');
+          alert(`Seats booked: ${bookedSeatsMessage}\nTotal amount: ${totalAmount}`);
+          // Optionally, you can reset the UI here
+           location.reload();// Update UI to mark seats as booked
+          updateTotalAmountAndCount(); // Reset amount and count to zero
+        } catch (error) {
+          console.error('Booking failed:', error);
+        }
       }
     });
+  }
+
+  // Function to book a seat
+  function book(data) {
+    return fetch("http://localhost:8080/tickets/post", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Booking failed');
+          }
+          return response.json();
+        });
   }
 
   // Function to fetch schedules
@@ -172,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Add event listener to update times based on selected date
       dateInput.addEventListener('change', () => {
+
         const selectedDate = new Date(date);
         const filteredSchedules = schedules.filter(schedule => new Date(schedule.start).toLocaleDateString() === selectedDate.toLocaleDateString());
         updateTimes(filteredSchedules);
@@ -212,8 +201,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       timeInput.addEventListener('change', () => {
+
         fetchBookedSeats(scheduleID);
       });
     });
+  }
+
+  // Function to update total amount and count of selected seats
+  function updateTotalAmountAndCount() {
+    let tickets = seats.querySelectorAll("input:not(:disabled)");
+    let amount = 0;
+    let count = 0;
+
+    tickets.forEach((ticket) => {
+      if (ticket.checked) {
+        count++;
+        amount += 75000;
+      }
+    });
+
+    document.querySelector(".amount").innerHTML = amount;
+    document.querySelector(".count").innerHTML = count;
   }
 });

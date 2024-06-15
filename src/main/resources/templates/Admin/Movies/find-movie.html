@@ -20,7 +20,9 @@
     </form>
 
     <p class="h4 mb-4">Movie List</p>
-
+    <a th:href="@{/admin/movies}" class="btn btn-dark">Clear Search</a>
+    <a th:href="@{/admin/movies/list}" class="btn btn-dark">Back to Movies List</a>
+   <br><br>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
         <tr>
@@ -52,8 +54,7 @@
         </tbody>
     </table>
 
-    <a th:href="@{/admin/movies}" class="btn btn-dark">Clear Search</a>
-    <a th:href="@{/admin/movies/list}" class="btn btn-dark">Back to Movies List</a>
+
 </div>
 </body>
 </html>

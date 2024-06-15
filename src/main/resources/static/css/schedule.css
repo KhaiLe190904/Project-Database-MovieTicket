@@ -15,7 +15,7 @@ body {
     width: 80%;
     margin-top: 50vh;
     transform: translateY(-50%);
-    margin-left: 200px;
+    margin-left: 70px;
 }
 
 .left {
@@ -25,7 +25,7 @@ body {
 
 .right {
     flex: 0.5;
-    margin-left: 20px;
+    margin-left: 70px;
 }
 
 h1 {
