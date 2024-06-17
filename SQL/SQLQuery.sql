@@ -64,18 +64,12 @@ CREATE TABLE tickets (
   id INT PRIMARY KEY IDENTITY(1,1),
   seat varchar(MAX) not null,
   user_id INT NOT NULL,
-  room_id INT not null,
   schedule_id INT NOT NULL,
-  bill_id INT NOT NULL,
   price decimal NOT NULL,
   FOREIGN KEY (schedule_id) REFERENCES schedules(id)
   ON DELETE NO ACTION,
-  FOREIGN KEY (bill_id) REFERENCES bills(id)
-  ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id)
   ON DELETE NO ACTION,
-  FOREIGN KEY (room_id) REFERENCES rooms(id)
-  ON DELETE CASCADE
 );
 
 CREATE TABLE roles (

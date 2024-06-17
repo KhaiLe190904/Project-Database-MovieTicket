@@ -75,7 +75,6 @@ public class MovieController {
     }
 
 
-
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel){
         // create model attribute to bind form data

@@ -45,9 +45,12 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public String listMovies(Model model,
+    public String listSchedule(@ModelAttribute("user") UserDto userDto, Model model,
                              @RequestParam(defaultValue = "0") int page,
                              @RequestParam(defaultValue = "5") int size) {
+        if (userDto.getUsername() == null){
+            return "redirect:/access-denied";
+        }
         Page<Movie> moviePage = movieService.findPaginated(PageRequest.of(page, size));
         model.addAttribute("movies", moviePage.getContent());
         model.addAttribute("currentPage", page);
