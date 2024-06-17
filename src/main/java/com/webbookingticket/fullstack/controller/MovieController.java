@@ -86,12 +86,12 @@ public class MovieController {
 
     @PostMapping("/save")
     public String saveMovie(@ModelAttribute("movie") Movie theMovie, RedirectAttributes redirectAttributes){
-        Category movieCategory = categoryRepository.findByName(theMovie.getMovieCategory());
-        if (movieCategory != null) {
-            theMovie.setCategories(Arrays.asList(movieCategory));
-        } else {
-            throw new RuntimeException("Category not found");
-        }
+//        Category movieCategory = categoryRepository.findByName(theMovie.getMovieCategory());
+//        if (movieCategory != null) {
+//            theMovie.setCategories(Arrays.asList(movieCategory));
+//        } else {
+//            throw new RuntimeException("Category not found");
+//        }
         movieService.save(theMovie);
         redirectAttributes.addFlashAttribute("message", "Movie updated successfully");
         return "redirect:/admin/movies/list";
