@@ -20,9 +20,12 @@ import java.util.Date;
 @Builder
 public class ScheduleDto {
 
+    private Long id;
+
     private Date start;
 
     private int movie_id;
 
     private int room_id;
+
 }

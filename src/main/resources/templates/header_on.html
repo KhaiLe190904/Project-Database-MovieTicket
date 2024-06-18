@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/css/Navbar.css" th:href="@{/css/header.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="../Navbar/Navbar.html" th:href="@{/home}">Home</a>
+        <a href="" th:href="@{/contact}" >Contacts</a>
+        <a href="" th:href="@{/info}" >Info</a>
+        <a href="../Admin/Movies/movie-form.html" th:href="@{/admin/movies/list}">Admin page</a>
+        <div id="logout-btn">
+            <form action="#" th:action="@{/logout}">
+                <input type="submit" value="LOGOUT" method="GET"/>
+            </form>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

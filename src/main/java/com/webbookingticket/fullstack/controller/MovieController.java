@@ -1,38 +1,40 @@
 package com.webbookingticket.fullstack.controller;
 
-import com.webbookingticket.fullstack.dto.UserRegistrationDto;
+import com.webbookingticket.fullstack.dto.UserDto;
 import com.webbookingticket.fullstack.model.Category;
 import com.webbookingticket.fullstack.model.Movie;
-import com.webbookingticket.fullstack.model.Schedule;
-import com.webbookingticket.fullstack.model.User;
 import com.webbookingticket.fullstack.repository.CategoryRepository;
-import com.webbookingticket.fullstack.repository.ScheduleRepository;
 import com.webbookingticket.fullstack.service.MovieService;
 import com.webbookingticket.fullstack.service.MovieServiceImpl;
-import jakarta.persistence.Column;
+import com.webbookingticket.fullstack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/movies")
+@SessionAttributes("user")
 public class MovieController {
     private final MovieServiceImpl movieServiceImpl;
     private MovieService movieService;
+    private UserService userService;
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @ModelAttribute("user")
+    public UserDto getUserDto() {
+        return new UserDto();
+    }
 
     @Value("${category}")
     private List<String> category;
@@ -44,22 +46,37 @@ public class MovieController {
         this.categoryRepository = categoryRepository;
     }
 
+    // TIM KIEM
+    @GetMapping
+    public String listMovies(Model model, @RequestParam(name = "keyword", required = false) String keyword) {
 
-    @ModelAttribute("user")
-    public UserRegistrationDto getUserRegistrationDto() {
-        return new UserRegistrationDto();
+        List<Movie> movies;
+
+        if (keyword != null && !keyword.isEmpty()) {
+            movies = movieService.findByNameOrDescriptionOrCategory(keyword);
+        } else {
+            movies = movieService.findAll();
+        }
+
+        model.addAttribute("movies", movies);
+        return "Admin/Movies/find-movie";
     }
 
-
-    // add mapping for "/list"
     @GetMapping("/list")
-    public String listMovie(Model theModel){
-        // get the movies from db
-        List<Movie> theMovies = movieService.findAll();
-        // add to the spring model
-        theModel.addAttribute("movies", theMovies);
+    public String listMovie(@ModelAttribute("user") UserDto userDto, Model theModel, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        if (userDto.getUsername() == null || userDto.getPassword().equals("test123")) {
+//            if(!userDto.getRoles().equals("ROLE_ADMIN")) {
+//                return "redirect:/access-denied";
+//            }
+            return "redirect:/access-denied";
+        }
+        Page<Movie> moviePage = movieService.findPaginated(PageRequest.of(page, size));
+        theModel.addAttribute("movies", moviePage.getContent());
+        theModel.addAttribute("currentPage", page);
+        theModel.addAttribute("totalPages", moviePage.getTotalPages());
         return "Admin/Movies/list-movies";
     }
+
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel){
@@ -104,9 +121,4 @@ public class MovieController {
         return "redirect:/admin/movies/list";
     }
 
-    @GetMapping("/list/{name}")
-    public Movie findMovieName(@PathVariable String name){
-        Movie theMovie = movieService.findMovieByName(name);
-        return theMovie;
-    }
 }

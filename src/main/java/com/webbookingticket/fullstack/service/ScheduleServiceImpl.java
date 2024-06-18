@@ -19,12 +19,13 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ScheduleServiceImpl implements ScheduleService {
+public class  ScheduleServiceImpl implements ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
-    public ScheduleRepository theScheduleRepository;
-    public RoomRepository theRoomRepository;
-    public MovieRepository theMovieRepository;
+    private final ScheduleRepository theScheduleRepository;
+    private final RoomRepository theRoomRepository;
+    private final MovieRepository theMovieRepository;
+
 
     private final ModelMapper modelMapper;
 
@@ -36,18 +37,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleDto> getAllSchedules() {
-        return scheduleRepository.findAll().stream().map(this::toDto).toList();
+    public List<Schedule> getScheduleByMovieId(int movieId) {
+        return scheduleRepository.findByMovieId(movieId);
     }
 
     private Schedule toEntity(ScheduleDto scheduleDto) {
-        Optional<Room> room = theRoomRepository.findById(scheduleDto.getRoom_id());
         Optional<Movie> movie = theMovieRepository.findById(scheduleDto.getMovie_id());
+        Optional<Room> room = theRoomRepository.findById(scheduleDto.getRoom_id());
         Schedule schedule = modelMapper.map(scheduleDto, Schedule.class);
         schedule.setRoom(room.orElse(null));
         schedule.setMovie(movie.orElse(null));
         return schedule;
     }
+
     private ScheduleDto toDto(Schedule schedule) {
         int roomId = schedule.getRoom().getId();
         int movieId = schedule.getMovie().getId();

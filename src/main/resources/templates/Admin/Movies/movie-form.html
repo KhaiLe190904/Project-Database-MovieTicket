@@ -10,63 +10,65 @@
 
 <body>
 <div class="container">
-    <h3>Movie Directory</h3>
+    <h3 class="text-center">Movie Directory</h3>
     <hr>
 
-    <p class="h4 mb-4">Save Movie</p>
+    <p class="h4 mb-4 text-center">Save Movie</p>
 
     <form id="container" action="#" th:action="@{/admin/movies/save}"
           th:object="${movie}" method="POST">
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
         <input type="text" th:field="*{name}"
-               class="form-control mb-4 w-25" placeholder="Movie name" required>
+               class="form-control mb-4 w-50 mx-auto" placeholder="Movie name" required>
 
         <textarea maxlength="65635" th:field="*{description}"
-                  class="form-control mb-4 w-25" placeholder="Description" required>
+                  class="form-control mb-4 w-50 mx-auto" placeholder="Description" required>
             </textarea>
 
         <input type="text" th:field="*{director}"
-               class="form-control mb-4 w-25" placeholder="Director">
+               class="form-control mb-4 w-50 mx-auto" placeholder="Director">
 
         <input type="text" th:field="*{actors}"
-               class="form-control mb-4 w-25" placeholder="Actors">
-        <div style="text-align: center;">
-        <label for="addCategory" > Please choose the category </label>
-            <select id="addCategory" th:field="*{movieCategory}" class="form-control mb-4 w-25" style="margin: 0 auto;">
+               class="form-control mb-4 w-50 mx-auto" placeholder="Actors">
+
+        <div class="text-center">
+            <label for="addCategory">Choose the category</label>
+            <select id="addCategory" th:field="*{movieCategory}" class="form-control mb-4 w-50 mx-auto">
                 <option th:each="tempCategory : ${category}" th:value="${tempCategory}" th:text="${tempCategory}"/>
             </select>
         </div>
 
         <input type="date" th:field="*{releaseDate}"
-               class="form-control mb-4 w-25" placeholder="Release Date">
-        <div style="text-align: center;">
-        <label for="duration"> Enter the duration </label>
-        <input id="duration" type="text" th:field="*{duration}"
-               class="form-control mb-4 w-25" placeholder="Duration" required>
+               class="form-control mb-4 w-50 mx-auto" placeholder="Release Date">
+
+        <div class="text-center">
+            <label for="duration">Enter the duration</label>
+            <input id="duration" type="text" th:field="*{duration}"
+                   class="form-control mb-4 w-50 mx-auto" placeholder="Duration" required>
         </div>
+
         <input type="url" th:field="*{trailerUrl}"
-               class="form-control mb-4 w-25" placeholder="Trailer URL" required>
+               class="form-control mb-4 w-50 mx-auto" placeholder="Trailer URL" required>
 
-        <!-- isShowing dang loi -->
-
-        <div style="text-align: center;">
-        <label for="showing">The status of this movie?</label>
-        <input id="showing" type="text" th:field="*{isShowing}"
-               class="form-control mb-4 w-25"
-               placeholder="IS SHOWING?"
-               pattern="[01]"
-               title="Please enter 0 or 1"
-               required>
+        <div class="text-center">
+            <label for="showing">Is the movie showing?</label>
+            <input id="showing" type="text" th:field="*{isShowing}"
+                   class="form-control mb-4 w-50 mx-auto"
+                   placeholder="IS SHOWING?"
+                   pattern="[01]"
+                   title="Please enter 0 or 1"
+                   required>
+        </div>
 
         <input type="url" th:field="*{posterUrl}"
-               class="form-control mb-4 w-25" placeholder="Poster URL" required>
-        <button type="submit" class="btn btn-dark col-1">SAVE</button>
-        </div>
+               class="form-control mb-4 w-50 mx-auto" placeholder="Poster URL" required>
+
+        <button type="submit" class="btn btn-dark col-1 mx-auto d-block">SAVE</button>
     </form>
 
     <hr>
-    <a th:href="@{/admin/movies/list}">Back to Movie List</a>
+    <a th:href="@{/admin/movies/list}" class="text-center d-block">Back to Movie List</a>
 </div>
 </body>
 

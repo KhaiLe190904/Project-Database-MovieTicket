@@ -10,11 +10,21 @@ body{
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    background: linear-gradient(to right, rgb(58, 121, 76), rgb(168, 159, 142));
+}
+.signup {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(to right, rgb(58, 121, 76), rgb(168, 159, 142));
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 .wrapper{
     width: 420px;
