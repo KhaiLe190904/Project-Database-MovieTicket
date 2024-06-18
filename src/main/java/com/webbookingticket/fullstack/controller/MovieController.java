@@ -64,7 +64,10 @@ public class MovieController {
 
     @GetMapping("/list")
     public String listMovie(@ModelAttribute("user") UserDto userDto, Model theModel, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
-        if (userDto.getUsername() == null) {
+        if (userDto.getUsername() == null || userDto.getPassword().equals("test123")) {
+//            if(!userDto.getRoles().equals("ROLE_ADMIN")) {
+//                return "redirect:/access-denied";
+//            }
             return "redirect:/access-denied";
         }
         Page<Movie> moviePage = movieService.findPaginated(PageRequest.of(page, size));
@@ -86,12 +89,12 @@ public class MovieController {
 
     @PostMapping("/save")
     public String saveMovie(@ModelAttribute("movie") Movie theMovie, RedirectAttributes redirectAttributes){
-//        Category movieCategory = categoryRepository.findByName(theMovie.getMovieCategory());
-//        if (movieCategory != null) {
-//            theMovie.setCategories(Arrays.asList(movieCategory));
-//        } else {
-//            throw new RuntimeException("Category not found");
-//        }
+        Category movieCategory = categoryRepository.findByName(theMovie.getMovieCategory());
+        if (movieCategory != null) {
+            theMovie.setCategories(Arrays.asList(movieCategory));
+        } else {
+            throw new RuntimeException("Category not found");
+        }
         movieService.save(theMovie);
         redirectAttributes.addFlashAttribute("message", "Movie updated successfully");
         return "redirect:/admin/movies/list";
