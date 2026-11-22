@@ -54,17 +54,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean checkPasswordUser(String username, String password) {
-        User user = userRepository.findByUsername(username);
-        if (user.getPassword().equals(password)) return true;
-        return false;
+        return null;
     }
 
     @Override
     public Boolean checkUsernameUser(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user==null) return false;
-        return true;
+        return null;
     }
+
 
     @Override
     public User getUserByUsername(String username) {
@@ -76,6 +73,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.getById(id);
     }
 
-
-
+    
 }
